@@ -41,6 +41,7 @@ export default {
   data () {
     return {
       accountId: 'DEMODEMO', // TODO: configure this
+      accountChannelId: '0xQfGiFHjz3YBfO3o1jd', // TODO: configure this
       loading: false,
       broadcasts: []
     }
@@ -54,17 +55,39 @@ export default {
     }
   },
   methods: {
-    getBroadcasts() {
+    getBroadcasts () {
       console.log('Route params', this.$route.params)
+
       this.broadcasts = []
-      if (!this.$route.params.id) {
-        return;
+
+      let channelId = this.accountChannelId
+      let s = '-starts_at'
+      let q = 'timeframe:relevant'
+      let l = 20
+
+      switch (this.$route.name) {
+        case 'LiveAndRecentListView':
+          q = 'timeframe:current timeframe:past'
+          break
+        case 'UpcomingListView':
+          q = 'timeframe:current timeframe:future'
+          s = 'starts_at'
+          break
+        case 'ChannelListView':
+          channelId = this.$route.params.id
+          break
       }
+
+      if (!channelId) {
+        console.warn('No channel ID provided for route')
+        return
+      }
+
       this.loading = true
+
       // eslint-disable-next-line
       boxcast.getChannelBroadcasts(
-        this.$route.params.id,
-        {q: 'timeframe:relevant', s: '-starts_at', l: 20}
+        channelId, {q, s, l}
       ).then((broadcasts) => {
         console.log('Loaded channel broadcasts', broadcasts)
         this.broadcasts = broadcasts

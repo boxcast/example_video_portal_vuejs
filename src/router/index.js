@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import ChannelListView from '@/components/ChannelListView'
+import BroadcastView from '@/components/BroadcastView'
 
 Vue.use(Router)
 
@@ -22,9 +23,9 @@ export default new Router({
       component: ChannelListView
     },
     {
-      path: '/broadcasts/:id',
+      path: '/broadcasts/:broadcast_id',
       name: 'BroadcastView',
-      component: ChannelListView
+      component: BroadcastView
     }
   ]
 })
