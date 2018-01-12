@@ -127,11 +127,6 @@ export default {
   .col-sm-0 {
     display: none;
   }
-  .card-title, .card-text, .ellipse {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
 
   #boxcast-container .boxcast-well {
     /* reset */

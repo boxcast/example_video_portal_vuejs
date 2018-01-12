@@ -1,25 +1,28 @@
 <template>
   <div class="row">
     <div class="col-sm-4 col-md-3 col-lg-2">
-      <!-- Channels -->
       <ChannelNav />
     </div>
     <div class="col-sm-8 col-md-9 col-lg-10">
-      <!-- Selected Channel -->
-
-      <b-alert v-if="loading" variant="info" show>Loading Broadcasts...</b-alert>
+      <b-alert v-if="loading && broadcasts.length == 0" variant="info" show>Loading Broadcasts...</b-alert>
       <b-alert v-if="!loading && broadcasts.length == 0" variant="info" show>
         There are no broadcasts in the selected channel.
       </b-alert>
-
       <div class="row">
-        <div class="col-sm-6 col-md-4 col-lg-3"
-              v-for="b in broadcasts"
-              :key="b.id">
+        <div v-for="b in broadcasts" :key="b.id" class="col-sm-6 col-md-4 col-lg-3">
           <BroadcastCard :broadcast="b" :channelId="channelIdForBroadcastLink" />
         </div>
       </div>
-
+      <div class="row" v-if="pagination.next" style="margin-bottom:15px">
+        <div class="col-sm-12">
+          <button class="btn btn-sm btn-secondary btn-block"
+                  @click="getBroadcasts(false, {p: pagination.next})"
+                  v-bind:disabled="loading">
+            <span v-if="loading">Loading...</span>
+            <span v-if="!loading">Load More</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -33,6 +36,7 @@ export default {
       accountChannelId: BoxCastAPI.getAccountChannelId(),
       loading: false,
       broadcasts: [],
+      pagination: {},
       channelId: null,
       channelIdForBroadcastLink: null
     }
@@ -49,7 +53,7 @@ export default {
   },
   methods: {
     initChannelId () {
-      if (this.$route && this.$route.name === 'ChannelListView') {
+      if (this.$route && this.$route.name === 'ChannelListView' && this.$route.params) {
         this.channelId = this.$route.params.id
       } else {
         this.channelId = this.accountChannelId
@@ -66,7 +70,7 @@ export default {
           break
       }
     },
-    getBroadcasts () {
+    getBroadcasts (reset = true, args = {}) {
       if (!this.channelId) {
         console.warn('No channel ID provided for route')
         return
@@ -75,7 +79,6 @@ export default {
       let s = '-starts_at'
       let q = 'timeframe:relevant'
       let l = 20
-
       switch (this.$route.name) {
         case 'LiveAndRecentListView':
           q = 'timeframe:current timeframe:past'
@@ -85,14 +88,19 @@ export default {
           s = 'starts_at'
           break
       }
+      args = {s, q, l, ...args}
 
-      this.broadcasts = []
+      if (reset) {
+        this.broadcasts = []
+      }
       this.loading = true
 
       BoxCastAPI.getChannelBroadcasts(
-        this.channelId, {q, s, l}
-      ).then((broadcasts) => {
-        this.broadcasts = broadcasts
+        this.channelId, args
+      ).then((response) => {
+        console.log(response)
+        this.broadcasts = this.broadcasts.concat(response.broadcasts)
+        this.pagination = response.pagination
         this.loading = false
       }).catch((e) => {
         console.error(e)
