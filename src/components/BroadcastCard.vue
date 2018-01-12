@@ -11,7 +11,7 @@
       <p class="card-text">
       {{broadcast.description || '&nbsp;'}}
       </p>
-      <a :href="'#/broadcasts/'+broadcast.id" target="_self" class="btn btn-primary btn-sm btn-block">Watch</a>
+      <a :href="'#/broadcasts/'+broadcast.id+'?channel_id='+channelId" target="_self" class="btn btn-primary btn-sm btn-block">Watch</a>
     </div>
   </article>
 </template>
@@ -20,7 +20,8 @@
 export default {
   name: 'BroadcastCard',
   props: [
-    'broadcast'
+    'broadcast',
+    'channelId'
   ],
   data () {
     return {

@@ -2,23 +2,23 @@
   <b-list-group>
     <b-list-group-item href="#/"
                        active
-                       v-if="$route.name == 'LiveAndRecentListView'">Live and Recent Broadcasts</b-list-group-item>
+                       v-if="$route.query.channel_id == 'live_recent' || $route.name == 'LiveAndRecentListView'">Live and Recent Broadcasts</b-list-group-item>
     <b-list-group-item href="#/"
-                       v-if="$route.name != 'LiveAndRecentListView'">Live and Recent Broadcasts</b-list-group-item>
+                       v-if="$route.query.channel_id != 'live_recent' && $route.name != 'LiveAndRecentListView'">Live and Recent Broadcasts</b-list-group-item>
 
     <b-list-group-item href="#/upcoming"
                        active
-                       v-if="$route.name == 'UpcomingListView'">Upcoming Broadcasts</b-list-group-item>
+                       v-if="$route.query.channel_id == 'upcoming' || $route.name == 'UpcomingListView'">Upcoming Broadcasts</b-list-group-item>
     <b-list-group-item href="#/upcoming"
-                       v-if="$route.name != 'UpcomingListView'">Upcoming Broadcasts</b-list-group-item>
+                       v-if="$route.query.channel_id != 'upcoming' && $route.name != 'UpcomingListView'">Upcoming Broadcasts</b-list-group-item>
 
 
     <div v-for="c in channels" :key="c.id">
       <b-list-group-item :href="'#/channels/'+c.id"
                          active
-                         v-if="$route.name == 'ChannelListView' && $route.params.id == c.id">{{c.name}}</b-list-group-item>
+                         v-if="$route.query.channel_id == c.id || $route.params.id == c.id">{{c.name}}</b-list-group-item>
       <b-list-group-item :href="'#/channels/'+c.id"
-                         v-if="$route.name != 'ChannelListView' || $route.params.id != c.id">{{c.name}}</b-list-group-item>
+                         v-if="$route.query.channel_id != c.id && $route.params.id != c.id">{{c.name}}</b-list-group-item>
     </div>
   </b-list-group>
 </template>
