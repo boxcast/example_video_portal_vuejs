@@ -18,18 +18,7 @@
       <div class=""
             v-for="b in relatedBroadcasts"
             :key="b.id">
-        <b-card
-          :title="b.name"
-          :img-src="b.preview"
-          img-alt="Image"
-          img-top
-          tag="article"
-          class="mb-2">
-          <p class="card-text">
-          {{b.description || '&nbsp;'}}
-          </p>
-          <b-button :href="'#/broadcasts/'+b.id" variant="primary">Watch</b-button>
-        </b-card>
+        <BroadcastCard :broadcast="b" />
       </div>
 
     </div>

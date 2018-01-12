@@ -16,18 +16,7 @@
         <div class="col-sm-6 col-md-4 col-lg-3"
               v-for="b in broadcasts"
               :key="b.id">
-          <b-card
-            :title="b.name"
-            :img-src="b.preview"
-            img-alt="Image"
-            img-top
-            tag="article"
-            class="mb-2">
-            <p class="card-text">
-            {{b.description || '&nbsp;'}}
-            </p>
-            <b-button :href="'#/broadcasts/'+b.id" variant="primary">Watch</b-button>
-          </b-card>
+          <BroadcastCard :broadcast="b" />
         </div>
       </div>
 
@@ -101,9 +90,4 @@ export default {
 </script>
 
 <style scoped>
-  .card-title, .card-text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
 </style>
