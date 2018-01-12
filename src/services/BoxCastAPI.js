@@ -1,11 +1,12 @@
+import Config from '@/config'
+
 // eslint-disable-next-line
 const boxcast = window.boxcast
-const portalCfg = window.BOXCAST_PORTAL
 if (!boxcast) {
   alert('BoxCast JavaScript library not found. Application will not function.')
 }
-if (!portalCfg) {
-  alert('BoxCast application portal not configured. Application will not function.')
+if (!Config || !Config.accountId || !Config.channelId) {
+  alert('BoxCast application portal not configured. Please ensure you have added your config.js')
 }
 
 const API_ROOT = 'https://api.boxcast.com'
@@ -31,10 +32,10 @@ let cache = new Cache()
 // Access BoxCast API with proper caching and memoization
 export default {
   getAccountChannelId: function () {
-    return portalCfg.channelId
+    return Config.channelId
   },
   getAccount: function () {
-    let k = `account:${portalCfg.accountId}`
+    let k = `account:${Config.accountId}`
     if (cache.get(k)) { return Promise.resolve(cache.get(k)) }
     return boxcast.utils.fetch(`${API_ROOT}/accounts`)
       .then(parseJson)
@@ -44,9 +45,9 @@ export default {
       })
   },
   getChannels: function () {
-    let k = `channels:${portalCfg.accountId}`
+    let k = `channels:${Config.accountId}`
     if (cache.get(k)) { return Promise.resolve(cache.get(k)) }
-    return boxcast.utils.fetch(`${API_ROOT}/accounts/${portalCfg.accountId}/channels`)
+    return boxcast.utils.fetch(`${API_ROOT}/accounts/${Config.accountId}/channels`)
       .then(parseJson)
       .then((a) => {
         cache.set(k, a)
