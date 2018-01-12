@@ -21,10 +21,9 @@
 * Broadcast details page with related videos widget
 * Integrates with the standard boxcast.js embed code, getting all its features for free (ticketing, geoblocking, etc)
 
-![live and upcoming broadcast listing](https://raw.githubusercontent.com/boxcast/example_video_portal_vuejs/screenshots/live_and_upcoming.png)
+![live and upcoming broadcast listing](https://github.com/boxcast/example_video_portal_vuejs/blob/master/screenshots/live_and_upcoming.png?raw=true)
 
-![sample broadcast details page with related videos and collapsable channel browser](https://raw.githubusercontent.com/boxcast/example_video_portal_vuejs/screenshots/broadcast_page.png)
-
+![sample broadcast details page with related videos and collapsable channel browser](https://github.com/boxcast/example_video_portal_vuejs/blob/master/screenshots/broadcast_page.png?raw=true)
 
 ## Customizing
 
