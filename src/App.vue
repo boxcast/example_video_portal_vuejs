@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import BoxCastAPI from '@/services/BoxCastAPI'
 export default {
   name: 'app',
   data () {
@@ -17,7 +16,7 @@ export default {
     }
   },
   mounted () {
-    
+
   },
   methods: {
   }

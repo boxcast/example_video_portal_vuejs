@@ -30,8 +30,7 @@ export default {
   name: 'ChannelListView',
   data () {
     return {
-      accountId: 'DEMODEMO', // TODO: configure this
-      accountChannelId: '0xQfGiFHjz3YBfO3o1jd', // TODO: configure this
+      accountChannelId: BoxCastAPI.getAccountChannelId(),
       loading: false,
       broadcasts: [],
       channelId: null,
@@ -50,7 +49,7 @@ export default {
   },
   methods: {
     initChannelId () {
-      if (this.$route && this.$route.name == 'ChannelListView') {
+      if (this.$route && this.$route.name === 'ChannelListView') {
         this.channelId = this.$route.params.id
       } else {
         this.channelId = this.accountChannelId
@@ -61,12 +60,13 @@ export default {
       switch (this.$route && this.$route.name) {
         case 'LiveAndRecentListView':
           this.channelIdForBroadcastLink = 'live_recent'
+          break
         case 'UpcomingListView':
           this.channelIdForBroadcastLink = 'upcoming'
+          break
       }
     },
     getBroadcasts () {
-      console.log('Route params', this.$route.params)
       if (!this.channelId) {
         console.warn('No channel ID provided for route')
         return
@@ -92,7 +92,6 @@ export default {
       BoxCastAPI.getChannelBroadcasts(
         this.channelId, {q, s, l}
       ).then((broadcasts) => {
-        console.log('Loaded channel broadcasts', broadcasts)
         this.broadcasts = broadcasts
         this.loading = false
       }).catch((e) => {

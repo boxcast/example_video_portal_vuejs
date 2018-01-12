@@ -31,7 +31,6 @@ export default {
   name: 'ChannelNav',
   data () {
     return {
-      accountId: 'DEMODEMO', // TODO: configure this
       loading: false,
       channels: []
     }
@@ -42,8 +41,7 @@ export default {
   methods: {
     getChannels () {
       this.loading = true
-      BoxCastAPI.getChannels(this.accountId).then((channels) => {
-        console.log('Loaded channels', channels)
+      BoxCastAPI.getChannels().then((channels) => {
         this.channels = channels
         this.loading = false
       }).catch((e) => {

@@ -1,7 +1,11 @@
 // eslint-disable-next-line
-const boxcast = window.boxcast;
+const boxcast = window.boxcast
+const portalCfg = window.BOXCAST_PORTAL
 if (!boxcast) {
-  alert('BoxCast JavaScript library not found. Application will not function.');
+  alert('BoxCast JavaScript library not found. Application will not function.')
+}
+if (!portalCfg) {
+  alert('BoxCast application portal not configured. Application will not function.')
 }
 
 const API_ROOT = 'https://api.boxcast.com'
@@ -12,20 +16,25 @@ function parseJson (r) {
 
 class Cache {
   _data = {}
-  set(k, v) {
+
+  set (k, v) {
     this._data[k] = v
   }
-  get(k) {
+
+  get (k) {
     return this._data[k]
   }
 }
 
-let cache = new Cache
+let cache = new Cache()
 
 // Access BoxCast API with proper caching and memoization
 export default {
-  getAccount: function(accountId) {
-    let k = `account:${accountId}`
+  getAccountChannelId: function () {
+    return portalCfg.channelId
+  },
+  getAccount: function () {
+    let k = `account:${portalCfg.accountId}`
     if (cache.get(k)) { return Promise.resolve(cache.get(k)) }
     return boxcast.utils.fetch(`${API_ROOT}/accounts`)
       .then(parseJson)
@@ -34,17 +43,17 @@ export default {
         return a
       })
   },
-  getChannels: function(accountId) {
-    let k = `channels:${accountId}`
+  getChannels: function () {
+    let k = `channels:${portalCfg.accountId}`
     if (cache.get(k)) { return Promise.resolve(cache.get(k)) }
-    return boxcast.utils.fetch(`${API_ROOT}/accounts/${accountId}/channels`)
+    return boxcast.utils.fetch(`${API_ROOT}/accounts/${portalCfg.accountId}/channels`)
       .then(parseJson)
       .then((a) => {
         cache.set(k, a)
         return a
       })
   },
-  getChannelById: function(channelId) {
+  getChannelById: function (channelId) {
     let k = `channel:${channelId}`
     if (cache.get(k)) { return Promise.resolve(cache.get(k)) }
     return boxcast.utils.fetch(`${API_ROOT}/channels/${channelId}`)
@@ -54,7 +63,7 @@ export default {
         return a
       })
   },
-  getChannelBroadcasts: function(channelId, args) {
+  getChannelBroadcasts: function (channelId, args) {
     // No caching here, keep it fresh
     return boxcast.getChannelBroadcasts(channelId, args)
   }

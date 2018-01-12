@@ -49,12 +49,12 @@
 </template>
 
 <script>
+import BoxCastAPI from '@/services/BoxCastAPI'
 export default {
   name: 'ChannelListView',
   data () {
     return {
-      accountId: 'DEMODEMO', // TODO: configure this
-      accountChannelId: '0xQfGiFHjz3YBfO3o1jd', // TODO: configure this
+      accountChannelId: BoxCastAPI.getAccountChannelId(),
       loading: false,
       showChannelSelector: false,
       relatedBroadcasts: [],
@@ -73,7 +73,6 @@ export default {
     }
   },
   destroyed () {
-    console.log('destroying broadcast view')
     this.context.unload()
   },
   watch: {
@@ -84,7 +83,6 @@ export default {
   },
   methods: {
     toggleChannelSelector () {
-      console.log('toggling channel selector')
       this.showChannelSelector = !this.showChannelSelector
     },
     initChannelId () {
@@ -95,12 +93,10 @@ export default {
       }
     },
     getBroadcast () {
-      console.log('Route params', this.$route.params)
-
       this.broadcast = {}
 
       let channelId = this.channelId
-      if (!channelId || channelId == 'live_recent' || channelId == 'upcoming') {
+      if (!channelId || channelId === 'live_recent' || channelId === 'upcoming') {
         console.log('Coercing special channel to account-level query', channelId)
         channelId = this.accountChannelId
       }
@@ -109,13 +105,13 @@ export default {
         disableRedirectRulesOnLoad: true,
         selectedBroadcastId: this.$route.params.broadcast_id,
         onLoadBroadcast: (b) => {
-          console.log('Loaded broadcast', b)
           this.broadcast = b
           this.loading = false
 
           // XXX:
           // eslint-disable-next-line
           this.relatedBroadcasts = boxcast.model.PlaylistStore.broadcasts
+          // eslint-disable-next-line
           this.channelName = boxcast.model.CurrentChannelStore.name
         },
         showTitle: true,
