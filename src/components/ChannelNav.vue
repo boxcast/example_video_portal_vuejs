@@ -12,6 +12,8 @@
     <b-list-group-item href="#/upcoming"
                        v-if="$route.query.channel_id != 'upcoming' && $route.name != 'UpcomingListView'">Upcoming Broadcasts</b-list-group-item>
 
+    <b-list-group-item disabled
+                       v-if="loading">Loading Channels...</b-list-group-item>
 
     <div v-for="c in channels" :key="c.id">
       <b-list-group-item :href="'#/channels/'+c.id"
@@ -24,6 +26,7 @@
 </template>
 
 <script>
+import BoxCastAPI from '@/services/BoxCastAPI'
 export default {
   name: 'ChannelNav',
   data () {
@@ -39,12 +42,7 @@ export default {
   methods: {
     getChannels () {
       this.loading = true
-      // eslint-disable-next-line
-      boxcast.utils.fetch(
-        `https://api.boxcast.com/accounts/${this.accountId}/channels`
-      ).then(
-        (r) => r.json()
-      ).then((channels) => {
+      BoxCastAPI.getChannels(this.accountId).then((channels) => {
         console.log('Loaded channels', channels)
         this.channels = channels
         this.loading = false

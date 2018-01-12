@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import BoxCastAPI from '@/services/BoxCastAPI'
 export default {
   name: 'ChannelListView',
   data () {
@@ -88,8 +89,7 @@ export default {
       this.broadcasts = []
       this.loading = true
 
-      // eslint-disable-next-line
-      boxcast.getChannelBroadcasts(
+      BoxCastAPI.getChannelBroadcasts(
         this.channelId, {q, s, l}
       ).then((broadcasts) => {
         console.log('Loaded channel broadcasts', broadcasts)

@@ -1,17 +1,19 @@
 <template>
   <div class="row">
-    <div class="col-sm-12 text-left">
-      <button class="btn btn-default"
+    <div class="col-sm-12 text-left" style="margin-bottom:15px">
+      <button class="btn btn-sm btn-outline-secondary"
+              title="Show Channel Selector"
               v-if="!showChannelSelector"
               @click="toggleChannelSelector">
         &gt;
       </button>
-      <button class="btn btn-default"
+      <button class="btn btn-sm btn-outline-secondary"
+              title="Hide Channel Selector"
               v-if="showChannelSelector"
               @click="toggleChannelSelector">
         &lt;
       </button>
-      Channel Name
+      {{ channelName }}
     </div>
     <div :class="showChannelSelector ? 'col-sm-4 col-md-3 col-lg-2' : 'col-sm-0'">
       <ChannelNav />
@@ -32,7 +34,7 @@
           {{broadcast.starts_at}}
           -->
 
-          <h3>Related Broadcasts</h3>
+          <p class="ellipse text-left">Related Broadcasts</p>
           <div class=""
                 v-for="b in relatedBroadcasts"
                 v-if="b.id != broadcast.id"
@@ -56,7 +58,8 @@ export default {
       loading: false,
       showChannelSelector: false,
       relatedBroadcasts: [],
-      broadcast: {}
+      broadcast: {},
+      channelName: ''
     }
   },
   mounted () {
@@ -113,6 +116,7 @@ export default {
           // XXX:
           // eslint-disable-next-line
           this.relatedBroadcasts = boxcast.model.PlaylistStore.broadcasts
+          this.channelName = boxcast.model.CurrentChannelStore.name
         },
         showTitle: true,
         showDescription: true,
@@ -127,7 +131,7 @@ export default {
   .col-sm-0 {
     display: none;
   }
-  .card-title, .card-text {
+  .card-title, .card-text, .ellipse {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
