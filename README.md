@@ -4,16 +4,14 @@
 
 ## Getting Started
 
-* Make sure you open `index.html` and change the configuration to point to your BoxCast account:
+* Make sure your have a BoxCast account in good standing. <a href="https://www.boxcast.com">Contact sales if you need to get started streaming</a>.
+* Make a copy of `src/config.example.js` as `src/config.js` and change the configuration to point to your BoxCast account:
   ```
-    <script src="https://js.boxcast.com/v3.min.js"></script>
-    <script>
-    var BOXCAST_PORTAL = {
-      accountId: '<-- your account ID here -->',
-      channelId: '<-- your root channel ID here -->',
-    };
-    </script>
-    ```
+  export default {
+    accountId: 'abcd1234567890',  // contact BoxCast support if you need help finding your IDs
+    channelId: 'efgh0987654321'
+  }
+  ```
 * See Customizing below for running locally, then build for deployment
 
 ## Features
@@ -22,6 +20,11 @@
 * Lists and paginates through all videos in a channel
 * Broadcast details page with related videos widget
 * Integrates with the standard boxcast.js embed code, getting all its features for free (ticketing, geoblocking, etc)
+
+![live and upcoming broadcast listing](https://raw.githubusercontent.com/boxcast/example_video_portal_vuejs/screenshots/live_and_upcoming.png)
+
+![sample broadcast details page with related videos and collapsable channel browser](https://raw.githubusercontent.com/boxcast/example_video_portal_vuejs/screenshots/broadcast_page.png)
+
 
 ## Customizing
 
