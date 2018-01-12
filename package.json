@@ -8,11 +8,7 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js",
-    "deploy-dev": "aws s3 sync dist/ s3://assets.dev.boxcast.com/apps/example_video_portal_vuejs/ --profile=dev",
-    "invalidate-dev": "aws cloudfront create-invalidation --distribution-id E1ZVJXQE0Y3BD7 --paths /apps/example_video_portal_vuejs/* --profile=dev",
-    "deploy-prod": "aws s3 sync dist/ s3://assets.boxcast.com/apps/example_video_portal_vuejs/ --profile=prod",
-    "invalidate-prod": "aws cloudfront create-invalidation --distribution-id E24UHDD37D6BG2 --paths /apps/example_video_portal_vuejs/* --profile=prod"
+    "build": "node build/build.js"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-beta.2",
