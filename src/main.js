@@ -3,6 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import BootstrapVue from 'bootstrap-vue'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+import ChannelNav from '@/components/ChannelNav'
+
+Vue.use(BootstrapVue)
+Vue.component('ChannelNav', ChannelNav)
 
 Vue.config.productionTip = false
 
@@ -11,5 +20,5 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App }
+  components: { App, ChannelNav }
 })
