@@ -19,7 +19,7 @@
             LIVE
           </div>
           <div class="timeframe badge badge-warning" v-if="timeframe == 'future'">
-            Starts Soon
+            Upcoming
           </div>
           <div class="timeframe badge badge-secondary" v-if="timeframe == 'past' || timeframe == 'recently-ended'">
             Recorded
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="card-body">
-      <h4 class="card-title ellipse">{{broadcast.name}}</h4>
+      <h4 class="card-title">{{broadcast.name}}</h4>
       <p class="card-text ellipse"><small>{{description}}</small></p>
     </div>
   </a>
@@ -64,16 +64,22 @@ export default {
       let prefix = ''
       switch (this.timeframe) {
         case 'future':
-          prefix = `Starts ${BoxCastAPI.utils.formatRelative(this.broadcast.starts_at, 'in')} - `
+          prefix = `Starts ${BoxCastAPI.utils.formatRelative(this.broadcast.starts_at, '')}`
           break
         case 'current':
           break
         case 'recently-ended':
         case 'past':
-          prefix = `Ended ${BoxCastAPI.utils.formatRelative(this.broadcast.stops_at, '', 'ago')} - `
+          prefix = `Ended ${BoxCastAPI.utils.formatRelative(this.broadcast.stops_at, '', '')}`
           break
       }
-      return `${prefix}${this.broadcast.description || ''}`
+      if (prefix && this.broadcast.description) {
+        return `${prefix} - ${this.broadcast.description}`
+      } else if (prefix) {
+        return prefix
+      } else {
+        return this.broadcast.description
+      }
     }
   },
   methods: {
@@ -92,8 +98,14 @@ export default {
     transform: scale(1.05);
   }
   .card-title, .card-text {
+    text-align: left;
     font-size: 1rem;
     margin-bottom: 0;
+  }
+  .card-title {
+    /* ellipse after approx 2 lines */
+    height: 38px;
+    overflow:hidden;
   }
   .card-body {
     padding: 10px 5px;
