@@ -79,6 +79,7 @@ export default {
     '$route' (to, from) {
       this.initChannelId()
       this.getBroadcast()
+      window.scrollTo(0, 0)
     }
   },
   methods: {
