@@ -49,9 +49,16 @@ export default {
     if (cache.get(k)) { return Promise.resolve(cache.get(k)) }
     return boxcast.utils.fetch(`${API_ROOT}/accounts/${Config.accountId}/channels`)
       .then(parseJson)
-      .then((a) => {
-        cache.set(k, a)
-        return a
+      .then((channels) => {
+        if (Config.channelFilter) {
+          return channels.filter(Config.channelFilter)
+        } else {
+          return channels
+        }
+      })
+      .then((channels) => {
+        cache.set(k, channels)
+        return channels
       })
   },
   getChannelById: function (channelId) {
