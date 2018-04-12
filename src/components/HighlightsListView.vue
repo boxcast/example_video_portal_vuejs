@@ -15,7 +15,7 @@
       </div>
       <div class="row" v-if="pagination.next" style="margin-bottom:15px">
         <div class="col-sm-12">
-          <button class="btn btn-sm btn-secondary btn-block"
+          <button class="btn btn-lg btn-secondary btn-block"
                   @click="getHighlights(false, {p: pagination.next})"
                   v-bind:disabled="loading">
             <span v-if="loading">Loading...</span>
