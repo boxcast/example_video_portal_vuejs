@@ -12,6 +12,12 @@
     <b-list-group-item href="#/upcoming"
                        v-if="$route.query.channel_id != 'upcoming' && $route.name != 'UpcomingListView'">Upcoming Broadcasts</b-list-group-item>
 
+    <b-list-group-item href="#/highlights"
+                       active
+                       v-if="$route.query.channel_id == 'highlights' || $route.name == 'HighlightsListView'">Highlights</b-list-group-item>
+    <b-list-group-item href="#/highlights"
+                       v-if="$route.query.channel_id != 'highlights' && $route.name != 'HighlightsListView'">Highlights</b-list-group-item>
+
     <b-list-group-item disabled
                        v-if="loading">Loading Channels...</b-list-group-item>
 

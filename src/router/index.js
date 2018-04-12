@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import ChannelListView from '@/components/ChannelListView'
+import HighlightsListView from '@/components/HighlightsListView'
 import BroadcastView from '@/components/BroadcastView'
+import HighlightView from '@/components/HighlightView'
 
 Vue.use(Router)
 
@@ -18,6 +20,11 @@ export default new Router({
       component: ChannelListView
     },
     {
+      path: '/highlights',
+      name: 'HighlightsListView',
+      component: HighlightsListView
+    },
+    {
       path: '/channels/:id',
       name: 'ChannelListView',
       component: ChannelListView
@@ -26,6 +33,11 @@ export default new Router({
       path: '/broadcasts/:broadcast_id',
       name: 'BroadcastView',
       component: BroadcastView
+    },
+    {
+      path: '/highlights/:highlight_id',
+      name: 'HighlightView',
+      component: HighlightView
     }
   ]
 })

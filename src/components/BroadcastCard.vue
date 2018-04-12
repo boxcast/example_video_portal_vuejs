@@ -1,5 +1,5 @@
 <template>
-  <a class="card mb-4" :href="'#/broadcasts/'+broadcast.id+'?channel_id='+channelId" target="_self">
+  <a class="card mb-4" :href="link" target="_self">
     <div class="card-img-top">
       <div class="fixed-16-9">
         <div :style="bgStyle" v-if="broadcast.preview">
@@ -49,6 +49,13 @@ export default {
   mounted () {
   },
   computed: {
+    link () {
+      if (this.channelId === 'highlights') {
+        return `#/highlights/${this.broadcast.id}`;
+      } else {
+        return `#/broadcasts/${this.broadcast.id}?channel_id=${this.channelId}`;
+      }
+    },
     bgStyle () {
       return {
         'background-image': `url("${this.broadcast.preview}")`,

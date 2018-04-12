@@ -85,6 +85,20 @@ export default {
         return { broadcasts, pagination }
       })
   },
+  getChannelHighlights: function (channelId, args) {
+    // No caching here, keep it fresh, but do handle pagination
+    let pagination = {}
+    let qs = args ? `?${boxcast.utils.Util.qsFromObj(args)}` : ''
+    return boxcast.utils.fetch(`${API_ROOT}/channels/${channelId}/highlights${qs}`)
+      .then((r) => {
+        pagination = JSON.parse(r.headers.get('X-Pagination'))
+        return r
+      })
+      .then(parseJson)
+      .then((highlights) => {
+        return { highlights, pagination }
+      })
+  },
   utils: {
     // Parse start/stop to determine current/future/recently-ended/past
     timeframe: (broadcast) => boxcast.utils.broadcast.timeframe(broadcast),
