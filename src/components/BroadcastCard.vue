@@ -51,9 +51,9 @@ export default {
   computed: {
     link () {
       if (this.channelId === 'highlights') {
-        return `#/highlights/${this.broadcast.id}`;
+        return `#/highlights/${this.broadcast.id}`
       } else {
-        return `#/broadcasts/${this.broadcast.id}?channel_id=${this.channelId}`;
+        return `#/broadcasts/${this.broadcast.id}?channel_id=${this.channelId}`
       }
     },
     bgStyle () {
