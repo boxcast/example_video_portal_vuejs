@@ -15,10 +15,10 @@
       </button>
       {{ channelName }}
     </div>
-    <div :class="showChannelSelector ? 'col-sm-4 col-md-3 col-lg-2' : 'col-sm-0'">
+    <div :class="showChannelSelector ? 'col-sm-4 col-md-3 col-lg-2' : 'col-sm-0 col-md-1'">
       <ChannelNav />
     </div>
-    <div :class="showChannelSelector ? 'col-sm-8 col-md-9 col-lg-10' : 'col-sm-12'">
+    <div :class="showChannelSelector ? 'col-sm-8 col-md-9 col-lg-10' : 'col-sm-12 col-md-11'">
       <div class="row">
         <div class="col-sm-9">
           <!-- Broadcast -->
@@ -125,8 +125,10 @@ export default {
 </script>
 
 <style>
-  .col-sm-0 {
-    display: none;
+  @media (max-width: 767px) {
+    .col-sm-0 {
+      display: none;
+    }
   }
 
   #boxcast-container .boxcast-well {
