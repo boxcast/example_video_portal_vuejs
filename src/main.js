@@ -10,10 +10,12 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import ChannelNav from '@/components/ChannelNav'
 import BroadcastCard from '@/components/BroadcastCard'
+import BroadcastRow from '@/components/BroadcastRow'
 
 Vue.use(BootstrapVue)
 Vue.component('ChannelNav', ChannelNav)
 Vue.component('BroadcastCard', BroadcastCard)
+Vue.component('BroadcastRow', BroadcastRow)
 
 Vue.config.productionTip = false
 

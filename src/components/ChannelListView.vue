@@ -8,11 +8,20 @@
       <b-alert v-if="!loading && broadcasts.length == 0" variant="info" show>
         There are no broadcasts in the selected channel.
       </b-alert>
-      <div class="row">
+
+      <div class="row" v-if="!listView">
         <div v-for="b in broadcasts" :key="b.id" class="col-sm-6 col-md-4 col-lg-3">
           <BroadcastCard :broadcast="b" :channelId="channelIdForBroadcastLink" />
         </div>
       </div>
+
+      <div v-if="listView">
+        <BroadcastRow v-for="b in broadcasts"
+                      :key="b.id"
+                      :broadcast="b"
+                      :channelId="channelIdForBroadcastLink"></BroadcastRow>
+      </div>
+
       <div class="row" v-if="pagination.next" style="margin-bottom:15px">
         <div class="col-sm-12">
           <button class="btn btn-lg btn-secondary btn-block"
@@ -29,11 +38,13 @@
 
 <script>
 import BoxCastAPI from '@/services/BoxCastAPI'
+import Config from '@/config'
 export default {
   name: 'ChannelListView',
   data () {
     return {
-      accountChannelId: BoxCastAPI.getAccountChannelId(),
+      accountChannelId: Config.channelId,
+      listView: !!Config.useListView,
       loading: false,
       broadcasts: [],
       pagination: {},
@@ -53,6 +64,14 @@ export default {
     }
   },
   methods: {
+    bgStyle (b) {
+      return {
+        'background-image': `url("${b.preview}")`,
+        'background-size': 'contain',
+        'background-repeat': 'no-repeat',
+        'background-position': '50% 50%'
+      }
+    },
     initChannelId () {
       if (this.$route && this.$route.name === 'ChannelListView' && this.$route.params) {
         this.channelId = this.$route.params.id
