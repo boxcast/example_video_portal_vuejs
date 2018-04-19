@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="container-fluid">
 
-    <b-jumbotron header="MyOrganization.tv"
+    <!--b-jumbotron header="MyOrganization.tv"
                  lead="Your home for watching live and on-demand broadcasts.">
-    </b-jumbotron>
+    </b-jumbotron-->
 
     <router-view/>
   </div>
