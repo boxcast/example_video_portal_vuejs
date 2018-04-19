@@ -2,6 +2,10 @@
 
 > Example video portal site for your BoxCast account written in vue.js
 
+## Demo
+
+[View Demo Portal](https://boxcast.github.io/example_video_portal_vuejs/)
+
 ## Getting Started
 
 * Make sure your have a BoxCast account in good standing. <a href="https://www.boxcast.com">Contact sales if you need to get started streaming</a>.
