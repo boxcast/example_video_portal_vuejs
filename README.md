@@ -8,6 +8,7 @@
 
 ## Getting Started
 
+* Read an [overview of custom BoxCast viewer experiences](http://boxcast.github.io/boxcast_js_docs/viewer_portal/).
 * Make sure your have a BoxCast account in good standing. <a href="https://www.boxcast.com">Contact sales if you need to get started streaming</a>.
 * Make a copy of `src/config.example.js` as `src/config.js` and change the configuration to point to your BoxCast account:
   ```
