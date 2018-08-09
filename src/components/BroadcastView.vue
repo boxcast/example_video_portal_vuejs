@@ -35,11 +35,13 @@
           -->
 
           <p class="ellipse text-left">Related Broadcasts</p>
-          <div class=""
-                v-for="b in relatedBroadcasts"
-                v-if="b.id != broadcast.id"
-                :key="b.id">
-            <BroadcastCard :broadcast="b" :channelId="channelId" />
+          <div class="row">
+            <div class="col-6 col-sm-12"
+                  v-for="b in relatedBroadcasts"
+                  v-if="b.id != broadcast.id"
+                  :key="b.id">
+              <BroadcastCard :broadcast="b" :channelId="channelId" />
+            </div>
           </div>
 
         </div>
