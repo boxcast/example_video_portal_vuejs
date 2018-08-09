@@ -7,6 +7,8 @@
                         :active="$route.query.channel_id == 'upcoming' || $route.name == 'UpcomingListView'">Upcoming Broadcasts</b-list-group-item>
       <b-list-group-item href="#/highlights"
                         :active="$route.name == 'HighlightView' || $route.name == 'HighlightsListView'">Highlights</b-list-group-item>
+      <b-list-group-item href="#/search"
+                        :active="$route.name == 'SearchView'">Search</b-list-group-item>
     </b-list-group>
 
     <h4>Athletics</h4>
