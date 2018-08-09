@@ -35,29 +35,40 @@
       </b-list-group>
     </div>
     <div class="d-block d-sm-none mb-5">
-      <select class="form-control" @change="navigate">
-        <option value="">Navigation</option>
-        <option value="/" :selected="$route.name == 'LiveAndRecentListView'">Live and Recent Broadcasts</option>
-        <option value="/upcoming" :selected="$route.name == 'UpcomingListView'">Upcoming Broadcasts</option>
-        <option value="/highlights" :selected="$route.name == 'HighlightsListView'">Highlights</option>
-        <option value="/search" :selected="$route.name == 'SearchView'">Search</option>
-        <optgroup label="Athletics">
-          <option disabled v-if="loading">Loading Channels...</option>
-          <option v-for="c in channels"
+      <div class="btn-group" style="width:100%">
+        <button style="width:100%" id="dLabel" @click="toggleDropdown" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Navigation
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dLabel" style="width:100%" v-bind:style="{display:menuOpen?'block':'none'}">
+          <a class="dropdown-item" href="#/" @click="toggleDropdown" v-bind:class="{active:$route.name == 'LiveAndRecentListView'}">Live and Recent Broadcasts</a>
+          <a class="dropdown-item" href="#/upcoming" @click="toggleDropdown"
+                                   v-bind:class="{active:$route.name == 'UpcomingListView'}">Upcoming Broadcasts</a>
+          <a class="dropdown-item" href="#/highlights" @click="toggleDropdown"
+                                   v-bind:class="{active:$route.name == 'HighlightsListView'}">Highlights</a>
+          <a class="dropdown-item" href="#/search" @click="toggleDropdown"
+                                   v-bind:class="{active:$route.name == 'SearchView'}">Search</a>
+
+          <div class="dropdown-divider"></div>
+
+          <h6 class="dropdown-header">Athletics</h6>
+          <a class="dropdown-item" disabled v-if="loading">Loading Channels...</a>
+          <a class="dropdown-item" v-for="c in channels"
                   :key="c.id"
                   v-if="c.name.indexOf('Athletics') >= 0"
-                  :selected="$route.params.id == c.id"
-                  :value="'/channels/'+c.id">{{c.name.replace('Athletics: ', '')}}</option>
-        </optgroup>
-        <optgroup label="Other Channels">
-          <option disabled v-if="loading">Loading Channels...</option>
-          <option v-for="c in channels"
+                  @click="toggleDropdown" v-bind:class="{active:$route.params.id == c.id}"
+                  :href="'#/channels/'+c.id">{{c.name.replace('Athletics: ', '')}}</a>
+
+          <div class="dropdown-divider"></div>
+
+          <h6 class="dropdown-header">Other Channels</h6>
+          <a class="dropdown-item" disabled v-if="loading">Loading Channels...</a>
+          <a class="dropdown-item" v-for="c in channels"
                   :key="c.id"
                   v-if="c.name.indexOf('Athletics') < 0"
-                  :selected="$route.params.id == c.id"
-                  :value="'/channels/'+c.id">{{c.name}}</option>
-        </optgroup>
-      </select>
+                  @click="toggleDropdown" v-bind:class="{active:$route.params.id == c.id}"
+                  :href="'#/channels/'+c.id">{{c.name}}</a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -69,19 +80,16 @@ export default {
   data () {
     return {
       loading: false,
-      channels: []
+      channels: [],
+      menuOpen: false
     }
   },
   mounted () {
     this.getChannels()
   },
   methods: {
-    navigate (e) {
-      var t = e.target
-      var route = t.options[t.selectedIndex].value
-      if (route) {
-        this.$router.push(route)
-      }
+    toggleDropdown () {
+      this.menuOpen = !this.menuOpen
     },
     getChannels () {
       this.loading = true
