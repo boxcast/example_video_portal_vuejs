@@ -8,7 +8,7 @@
         </div>
       </a>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-8 text-left">
       <h4 class="card-title">
         <a :href="link" target="_self">
          {{broadcast.name}}
