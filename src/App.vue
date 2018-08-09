@@ -51,4 +51,23 @@ export default {
   width: 100%;
   height: 100%;
 }
+
+@media (max-width: 767px) {
+  .col-sm-0 {
+    display: none;
+  }
+}
+
+#boxcast-container .boxcast-well {
+  /* reset */
+  border: none;
+  box-shadow: none;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+
+  /* clean */
+  margin-top: 15px;
+  padding: 15px;
+}
 </style>
