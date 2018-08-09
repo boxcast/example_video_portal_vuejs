@@ -15,10 +15,10 @@
       </button>
       {{ channelName }}
     </div>
-    <div :class="showChannelSelector ? 'col-sm-4 col-md-3 col-lg-2' : 'col-sm-0'">
+    <div :class="showChannelSelector ? 'col-sm-4 col-md-3 col-lg-2' : 'col-sm-0 col-md-1'">
       <ChannelNav />
     </div>
-    <div :class="showChannelSelector ? 'col-sm-8 col-md-9 col-lg-10' : 'col-sm-12'">
+    <div :class="showChannelSelector ? 'col-sm-8 col-md-9 col-lg-10' : 'col-sm-12 col-md-11'">
       <!-- Highlight -->
 
       <b-alert v-if="loading" variant="info" show>Loading Highlight ...</b-alert>
@@ -39,7 +39,7 @@ export default {
     return {
       accountChannelId: BoxCastAPI.getAccountChannelId(),
       loading: false,
-      showChannelSelector: true,
+      showChannelSelector: false,
       highlight: {},
       channelName: ''
     }
