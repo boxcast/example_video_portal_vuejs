@@ -127,4 +127,7 @@ export default {
 </script>
 
 <style>
+.container[data-container] {
+  max-width: 100%;
+}
 </style>
