@@ -6,6 +6,11 @@
     </b-jumbotron-->
 
     <router-view/>
+
+    <div style="opacity:0.8;margin:50px 0 20px;text-align:center;font-size:14px;line-height:14px;">
+      Powered by &nbsp;
+      <a href="https://www.boxcast.com" target="_blank"><img alt="BoxCast" src="https://cdn2.hubspot.net/hub/484866/file-2483746126-png/Logos/NewBoxCastLogo.png?t=1473431021465" style="height:14px;margin-top:-4px;"></a>
+    </div>
   </div>
 </template>
 
