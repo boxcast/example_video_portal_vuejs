@@ -101,7 +101,12 @@ export default {
       let l = 20
       switch (this.$route.name) {
         case 'LiveAndRecentListView':
-          q = 'timeframe:current timeframe:past'
+          // Include anything happening in next 24hr in the default view
+          var date = new Date()
+          var start = date.toISOString().slice(0, 10)
+          date.setDate(date.getDate() + 1)
+          var end = date.toISOString().slice(0, 10)
+          q = `timeframe:current timeframe:past starts_at:[${start} TO ${end}]`
           break
         case 'UpcomingListView':
           q = 'timeframe:current timeframe:future'
