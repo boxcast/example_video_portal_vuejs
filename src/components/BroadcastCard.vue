@@ -24,8 +24,7 @@
           <div class="timeframe badge badge-secondary" v-if="timeframe == 'past' || timeframe == 'recently-ended'">
             Recorded
           </div>
-          <span :class="'mascac-logo ' + icon" v-if="icon"
-            style="margin:0;"></span>
+          <span :class="'mascac-logo ' + icon" v-if="icon" style="margin:0;"></span>
         </div>
       </div>
     </div>
