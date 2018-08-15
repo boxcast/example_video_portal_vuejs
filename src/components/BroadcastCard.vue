@@ -12,9 +12,9 @@
           <div class="timeframe badge badge-secondary" v-if="timeframe == 'past' || timeframe == 'recently-ended'">
             Recorded
           </div>
+          <span :class="'mascac-logo ' + icon" v-if="icon" style="zoom:0.5;position:absolute;right:10px;bottom:0;top:auto;left:auto;margin:0;"></span>
         </div>
         <div class="no-preview" v-if="!broadcast.preview">
-          Preview not available
           <div class="timeframe badge badge-danger" v-if="timeframe == 'current'">
             LIVE
           </div>
@@ -24,8 +24,9 @@
           <div class="timeframe badge badge-secondary" v-if="timeframe == 'past' || timeframe == 'recently-ended'">
             Recorded
           </div>
+          <span :class="'mascac-logo ' + icon" v-if="icon"
+            style="margin:0;"></span>
         </div>
-        <span :class="'mascac-logo ' + icon" v-if="icon" style="zoom:0.5;position:absolute;right:10px;bottom:0;top:auto;left:auto;margin:0;"></span>
       </div>
     </div>
     <div class="card-body">
