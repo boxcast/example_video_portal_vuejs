@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="container-fluid">
 
-    <!--b-jumbotron header="MyOrganization.tv"
-                 lead="Your home for watching live and on-demand broadcasts.">
-    </b-jumbotron-->
+    <b-jumbotron header="MASCAC.tv"
+                 lead="">
+    </b-jumbotron>
 
     <router-view/>
 
@@ -74,5 +74,44 @@ export default {
   /* clean */
   margin-top: 15px;
   padding: 15px;
+}
+
+
+
+/* red: #E21F3C */
+/* dark: #000E1B */
+/* blue: #0B59A3 */
+/* navy: #043562*/
+
+body {
+  background-color: #000E1B;
+}
+.card {
+  background-color: #043562;
+  border-color: #043562;
+}
+.card-body {
+  background-color: #043562;
+  color: #ddd;
+}
+.channel-nav {
+  color: #ddd;
+}
+.list-group-item {
+  background-color: #E21F3C;
+  color: #ddd;
+}
+.list-group-item-action:focus, .list-group-item-action:hover {
+  background-color: #0B59A3;
+  color: #fff;
+}
+.list-group-item.active {
+  border-color: #043562;
+  background-color: #043562;
+  color: #fff;
+}
+.boxcast-theme-light .boxcast-well {
+  background-color: #E21F3C;
+  color: #ddd;
 }
 </style>

@@ -12,24 +12,12 @@
                           :active="$route.name == 'SearchView'">Search</b-list-group-item>
       </b-list-group>
 
-      <h4>Athletics</h4>
+      <h4>Schools</h4>
       <b-list-group>
         <b-list-group-item disabled
                           v-if="loading">Loading Channels...</b-list-group-item>
         <b-list-group-item v-for="c in channels"
                           :key="c.id"
-                          v-if="c.name.indexOf('Athletics') >= 0"
-                          :active="$route.query.channel_id == c.id || $route.params.id == c.id"
-                          :href="'#/channels/'+c.id">{{c.name.replace('Athletics: ', '')}}</b-list-group-item>
-      </b-list-group>
-
-      <h4>Other Channels</h4>
-      <b-list-group>
-        <b-list-group-item disabled
-                          v-if="loading">Loading Channels...</b-list-group-item>
-        <b-list-group-item v-for="c in channels"
-                          :key="c.id"
-                          v-if="c.name.indexOf('Athletics') < 0"
                           :active="$route.query.channel_id == c.id || $route.params.id == c.id"
                           :href="'#/channels/'+c.id">{{c.name}}</b-list-group-item>
       </b-list-group>
@@ -50,21 +38,10 @@
 
           <div class="dropdown-divider"></div>
 
-          <h6 class="dropdown-header">Athletics</h6>
+          <h6 class="dropdown-header">Schools</h6>
           <a class="dropdown-item" disabled v-if="loading">Loading Channels...</a>
           <a class="dropdown-item" v-for="c in channels"
                   :key="c.id"
-                  v-if="c.name.indexOf('Athletics') >= 0"
-                  @click="toggleDropdown" v-bind:class="{active:$route.params.id == c.id}"
-                  :href="'#/channels/'+c.id">{{c.name.replace('Athletics: ', '')}}</a>
-
-          <div class="dropdown-divider"></div>
-
-          <h6 class="dropdown-header">Other Channels</h6>
-          <a class="dropdown-item" disabled v-if="loading">Loading Channels...</a>
-          <a class="dropdown-item" v-for="c in channels"
-                  :key="c.id"
-                  v-if="c.name.indexOf('Athletics') < 0"
                   @click="toggleDropdown" v-bind:class="{active:$route.params.id == c.id}"
                   :href="'#/channels/'+c.id">{{c.name}}</a>
         </div>
@@ -93,12 +70,25 @@ export default {
     },
     getChannels () {
       this.loading = true
+      this.channels = [
+        {id: 'h5caqjlbaznkkeogpkyt', name: 'Bridgewater State University'},
+        {id: 'vllvvr5pg83mggb7kw2v', name: 'Fitchburg State University'},
+        {id: 'grzadi2oij5godrfty09', name: 'Framingham State University'},
+        {id: 'kkpc7wzow70pabbcty66', name: 'Massachusetts Maritime Academy'},
+        {id: 'y1id4pm3ainxdbkumnrs', name: 'Massachusetts College of Liberal Arts'},
+        {id: 'h311z4nlz9cd2cvqacbd', name: 'Salem State University'},
+        {id: 'y259mshcjqjloiu7brue', name: 'Westfield State University'},
+        {id: 'mshmvss7pspibfrs06vq', name: 'Worcester State University'},
+      ]
+      this.loading = false
+      /*
       BoxCastAPI.getChannels().then((channels) => {
         this.channels = channels
         this.loading = false
       }).catch((e) => {
         console.error(e)
       })
+      */
     }
   }
 }
