@@ -25,10 +25,14 @@
             Recorded
           </div>
         </div>
+        <span :class="'mascac-logo ' + icon" v-if="icon" style="zoom:0.5;position:absolute;right:10px;bottom:0;top:auto;left:auto;margin:0;"></span>
       </div>
     </div>
     <div class="card-body">
-      <h4 class="card-title">{{broadcast.name}}</h4>
+      <p class="card-text ellipse"><small>{{accountName}}</small></p>
+      <h4 class="card-title">
+        {{broadcast.name}}
+      </h4>
       <p class="card-text ellipse"><small>{{description}}</small></p>
     </div>
   </a>
@@ -36,6 +40,7 @@
 
 <script>
 import BoxCastAPI from '@/services/BoxCastAPI'
+import Config from '@/config'
 export default {
   name: 'BroadcastCard',
   props: [
@@ -49,6 +54,14 @@ export default {
   mounted () {
   },
   computed: {
+    accountName () {
+      let cfg = Config.staticChannels.filter((c) => c.accountId === this.broadcast.account_id)
+      return cfg && cfg[0] && cfg[0].name
+    },
+    icon () {
+      let cfg = Config.staticChannels.filter((c) => c.accountId === this.broadcast.account_id)
+      return cfg && cfg[0] && cfg[0].abbrev
+    },
     link () {
       if (this.channelId === 'highlights') {
         return `#/highlights/${this.broadcast.id}`
@@ -108,6 +121,9 @@ export default {
     text-align: left;
     font-size: 1rem;
     margin-bottom: 0;
+  }
+  .card-title {
+    font-weight: 800;
   }
   .card-title {
     /* ellipse after approx 2 lines */

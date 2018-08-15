@@ -10,16 +10,16 @@
     </div>
     <div class="logobar">
       <div class="site-logo"></div>
-      <ol id="members-nav" class="list-inline d-none d-md-block">
-        <li class="nav1 list-inline-item"></li>
-        <li class="nav2 list-inline-item"></li>
-        <li class="nav3 list-inline-item"></li>
-        <li class="nav4 list-inline-item"></li>
-        <li class="nav5 list-inline-item"></li>
-        <li class="nav6 list-inline-item"></li>
-        <li class="nav7 list-inline-item"></li>
-        <li class="nav8 list-inline-item"></li>
-      </ol>
+      <div class="d-none d-md-block">
+        <a href="#/channels/h5caqjlbaznkkeogpkyt" class="mascac-logo bw"></a>
+        <a href="#/channels/vllvvr5pg83mggb7kw2v" class="mascac-logo fitch"></a>
+        <a href="#/channels/grzadi2oij5godrfty09" class="mascac-logo fram"></a>
+        <a href="#/channels/kkpc7wzow70pabbcty66" class="mascac-logo mma"></a>
+        <a href="#/channels/y1id4pm3ainxdbkumnrs" class="mascac-logo mcla"></a>
+        <a href="#/channels/h311z4nlz9cd2cvqacbd" class="mascac-logo sal"></a>
+        <a href="#/channels/y259mshcjqjloiu7brue" class="mascac-logo west"></a>
+        <a href="#/channels/mshmvss7pspibfrs06vq" class="mascac-logo wor"></a>
+      </div>
     </div>
     <div class="titlebar">
       <div class="container-fluid">
@@ -181,46 +181,47 @@ body {
   text-indent:-9999px;
   background:url('./assets/mascac_sprite.png') no-repeat;
 }
-[id=members-nav] li {
+.mascac-logo {
+  display: inline-block;
   height:81px;
   background:url('./assets/mascac_sprite.png') no-repeat -9999px -9999px;
 }
-[id=members-nav] .nav1{
+.mascac-logo.bw {
   width:72px;
   margin-right:26px;
   background-position:0 -150px
 }
-[id=members-nav] .nav2{
+.mascac-logo.fitch {
   width:67px;
   margin-right:35px;
   background-position:-100px -150px;
 }
-[id=members-nav] .nav3{
+.mascac-logo.fram {
   width:61px;
   margin-right:34px;
   background-position:-202px -150px;
 }
-[id=members-nav] .nav4{
+.mascac-logo.mma {
   width:67px;
   margin-right:299px;
   background-position:-297px -150px;
 }
-[id=members-nav] .nav5{
+.mascac-logo.mcla {
   width:80px;
   margin-right:22px;
   background-position:-663px -150px;
 }
-[id=members-nav] .nav6{
+.mascac-logo.sal {
   width:72px;
   margin-right:35px;
   background-position:-765px -150px;
 }
-[id=members-nav] .nav7{
+.mascac-logo.west {
   width:63px;
   margin-right:21px;
   background-position:-872px -150px;
 }
-[id=members-nav] .nav8{
+.mascac-logo.wor {
   width:81px;
   background-position:-956px -150px;
 }

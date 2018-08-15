@@ -6,8 +6,8 @@
                           :active="$route.query.channel_id == 'live_recent' || $route.name == 'LiveAndRecentListView'">Live and Recent Broadcasts</b-list-group-item>
         <b-list-group-item href="#/upcoming"
                           :active="$route.query.channel_id == 'upcoming' || $route.name == 'UpcomingListView'">Upcoming Broadcasts</b-list-group-item>
-        <b-list-group-item href="#/highlights"
-                          :active="$route.name == 'HighlightView' || $route.name == 'HighlightsListView'">Highlights</b-list-group-item>
+        <!--b-list-group-item href="#/highlights"
+                          :active="$route.name == 'HighlightView' || $route.name == 'HighlightsListView'">Highlights</b-list-group-item-->
         <b-list-group-item href="#/search"
                           :active="$route.name == 'SearchView'">Search</b-list-group-item>
       </b-list-group>
@@ -31,8 +31,8 @@
           <a class="dropdown-item" href="#/" @click="toggleDropdown" v-bind:class="{active:$route.name == 'LiveAndRecentListView'}">Live and Recent Broadcasts</a>
           <a class="dropdown-item" href="#/upcoming" @click="toggleDropdown"
                                    v-bind:class="{active:$route.name == 'UpcomingListView'}">Upcoming Broadcasts</a>
-          <a class="dropdown-item" href="#/highlights" @click="toggleDropdown"
-                                   v-bind:class="{active:$route.name == 'HighlightsListView'}">Highlights</a>
+          <!--a class="dropdown-item" href="#/highlights" @click="toggleDropdown"
+                                   v-bind:class="{active:$route.name == 'HighlightsListView'}">Highlights</a-->
           <a class="dropdown-item" href="#/search" @click="toggleDropdown"
                                    v-bind:class="{active:$route.name == 'SearchView'}">Search</a>
 
@@ -51,7 +51,8 @@
 </template>
 
 <script>
-import BoxCastAPI from '@/services/BoxCastAPI'
+// import BoxCastAPI from '@/services/BoxCastAPI'
+import Config from '@/config'
 export default {
   name: 'ChannelNav',
   data () {
@@ -69,19 +70,9 @@ export default {
       this.menuOpen = !this.menuOpen
     },
     getChannels () {
-      this.loading = true
-      this.channels = [
-        {id: 'h5caqjlbaznkkeogpkyt', name: 'Bridgewater State University'},
-        {id: 'vllvvr5pg83mggb7kw2v', name: 'Fitchburg State University'},
-        {id: 'grzadi2oij5godrfty09', name: 'Framingham State University'},
-        {id: 'kkpc7wzow70pabbcty66', name: 'Massachusetts Maritime Academy'},
-        {id: 'y1id4pm3ainxdbkumnrs', name: 'Massachusetts College of Liberal Arts'},
-        {id: 'h311z4nlz9cd2cvqacbd', name: 'Salem State University'},
-        {id: 'y259mshcjqjloiu7brue', name: 'Westfield State University'},
-        {id: 'mshmvss7pspibfrs06vq', name: 'Worcester State University'},
-      ]
-      this.loading = false
+      this.channels = Config.staticChannels
       /*
+      this.loading = true
       BoxCastAPI.getChannels().then((channels) => {
         this.channels = channels
         this.loading = false
