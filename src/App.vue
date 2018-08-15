@@ -10,7 +10,7 @@
     </div>
     <div class="logobar">
       <div class="site-logo"></div>
-      <ol id="members-nav" class="list-inline">
+      <ol id="members-nav" class="list-inline d-none d-md-block">
         <li class="nav1 list-inline-item"></li>
         <li class="nav2 list-inline-item"></li>
         <li class="nav3 list-inline-item"></li>
@@ -22,17 +22,19 @@
       </ol>
     </div>
     <div class="titlebar">
-      <div class="row">
-        <div class="col-6 text-left">
-          Welcome to MASCAC.tv
-        </div>
-        <div class="col-6 text-right">
-          Return to MASCAC.com
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-6 text-left">
+            Welcome to MASCAC.tv
+          </div>
+          <div class="col-6 text-right">
+            Return to MASCAC.com
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="min-height:calc(100vh - 365px)">
       <router-view/>
     </div>
 
@@ -152,6 +154,9 @@ body {
   padding: 10px;
   font-weight: bold;
   text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .logobar {
   background: #0B59A3;
@@ -164,7 +169,7 @@ body {
   color: #fff;
   margin-bottom: 30px;
   font-weight: bold;
-  padding: 10px;
+  padding: 10px 0;
 }
 .site-logo {
   position:absolute;
@@ -218,5 +223,14 @@ body {
 [id=members-nav] .nav8{
   width:81px;
   background-position:-956px -150px;
+}
+@media (max-width: 1090px) {
+  .logobar {
+    zoom: 0.70;
+    height: 120px;
+  }
+  .site-logo {
+    top: 55px;
+  }
 }
 </style>

@@ -119,7 +119,8 @@ export default {
         },
         showTitle: true,
         showDescription: true,
-        showRelated: false
+        showRelated: false,
+        showCountdown: true
       })
     }
   }
