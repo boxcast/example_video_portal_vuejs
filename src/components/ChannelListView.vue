@@ -9,10 +9,12 @@
         There are no broadcasts in the selected channel.
       </b-alert>
 
-      <div class="row" v-if="!listView">
-        <div v-for="b in broadcasts" :key="b.id" class="col-sm-6 col-md-4 col-lg-3">
-          <BroadcastCard :broadcast="b" :channelId="channelIdForBroadcastLink" />
-        </div>
+      <div v-if="!listView">
+        <transition-group name="list" tag="div" class="row">
+          <div v-for="b in broadcasts" :key="b.id" class="col-sm-6 col-md-4 col-lg-3">
+            <BroadcastCard :broadcast="b" :channelId="channelIdForBroadcastLink" />
+          </div>
+        </transition-group>
       </div>
 
       <div v-if="listView">
@@ -135,5 +137,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+.list-enter-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.list-leave-active {
+  transition: none;
+}
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: scale(.95);
+}
 </style>
