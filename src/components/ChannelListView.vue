@@ -25,7 +25,7 @@
       <div v-if="!listView">
         <transition-group name="list" tag="div" class="row">
           <div v-for="b in broadcasts" :key="b.id" class="col-sm-6 col-md-4 col-lg-3">
-            <BroadcastCard :broadcast="b" :channelId="channelIdForBroadcastLink" />
+            <BroadcastCard :broadcast="b" :channelId="b.__viaRequestedChannelId || channelIdForBroadcastLink" />
           </div>
         </transition-group>
       </div>
@@ -34,7 +34,7 @@
         <BroadcastRow v-for="b in broadcasts"
                       :key="b.id"
                       :broadcast="b"
-                      :channelId="channelIdForBroadcastLink"></BroadcastRow>
+                      :channelId="b.__viaRequestedChannelId || channelIdForBroadcastLink"></BroadcastRow>
       </div>
 
       <div class="row" v-if="pagination.next" style="margin-bottom:15px">
@@ -149,6 +149,13 @@ export default {
             return BoxCastAPI.getChannelBroadcasts(c.id, args)
           })
         ).then((responses) => {
+          responses.forEach((response, i) => {
+            response.broadcasts.forEach((b) => {
+              b.__viaRequestedChannelId = Config.staticChannels[i].id
+            })
+          })
+          return responses
+        }).then((responses) => {
           let thisTripBroadcasts = []
           responses.forEach((response) => {
             thisTripBroadcasts = thisTripBroadcasts.concat(response.broadcasts)
