@@ -7,14 +7,11 @@
     <div class="logobar">
       <div class="site-logo"></div>
       <div class="d-none d-md-block">
-        <a href="#/channels/h5caqjlbaznkkeogpkyt" class="mascac-logo bw"></a>
-        <a href="#/channels/vllvvr5pg83mggb7kw2v" class="mascac-logo fitch"></a>
-        <a href="#/channels/grzadi2oij5godrfty09" class="mascac-logo fram"></a>
-        <a href="#/channels/kkpc7wzow70pabbcty66" class="mascac-logo mma"></a>
-        <a href="#/channels/y1id4pm3ainxdbkumnrs" class="mascac-logo mcla"></a>
-        <a href="#/channels/h311z4nlz9cd2cvqacbd" class="mascac-logo sal"></a>
-        <a href="#/channels/y259mshcjqjloiu7brue" class="mascac-logo west"></a>
-        <a href="#/channels/mshmvss7pspibfrs06vq" class="mascac-logo wor"></a>
+        <a v-for="c in channels"
+            :key="c.id"
+            v-bind:class="'mascac-logo ' + c.abbrev"
+            :href="'#/channels/'+c.id"
+            :title="c.name">{{c.name}}</a>
       </div>
     </div>
 
@@ -43,10 +40,12 @@
 </template>
 
 <script>
+import Config from '@/config'
 export default {
   name: 'app',
   data () {
     return {
+      channels: Config.staticChannels
     }
   },
   mounted () {
@@ -157,7 +156,7 @@ body {
 }
 .logobar {
   background: #0B59A3;
-  padding-top: 25px;
+  padding-top: 5px;
   height: 120px;
 }
 .titlebar {
@@ -182,6 +181,10 @@ body {
   display: inline-block;
   height:81px;
   background:url('./assets/mascac_sprite.png') no-repeat -9999px -9999px;
+
+  /* hide the text but leave it for possible seo and screenreaders */
+  white-space: nowrap;
+  font-size: 0px;
 }
 .mascac-logo.bw {
   width:72px;
