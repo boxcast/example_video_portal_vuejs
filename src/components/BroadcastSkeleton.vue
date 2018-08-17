@@ -61,6 +61,9 @@ export default {
   }
 
 
+  .card {
+    transform: scale(.95);
+  }
   .card-title span, .card-text span {
     display: inline-block;
     background: rgba(255,255,255,0.5);

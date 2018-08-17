@@ -199,7 +199,7 @@ function compare (a, b) {
   transition: none;
 }
 .list-enter, .list-leave-to {
-  opacity: 0;
+  opacity: 0.5;
   transform: scale(.95);
 }
 </style>
