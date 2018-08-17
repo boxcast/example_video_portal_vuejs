@@ -1,24 +1,9 @@
 <template>
   <div class="row">
-    <div class="col-sm-12 text-left" style="margin-bottom:15px">
-      <button class="btn btn-sm btn-outline-secondary"
-              title="Show Channel Selector"
-              v-if="!showChannelSelector"
-              @click="toggleChannelSelector">
-        &gt;
-      </button>
-      <button class="btn btn-sm btn-outline-secondary"
-              title="Hide Channel Selector"
-              v-if="showChannelSelector"
-              @click="toggleChannelSelector">
-        &lt;
-      </button>
-      {{ channelName }}
-    </div>
-    <div :class="showChannelSelector ? 'col-sm-4 col-md-3 col-lg-2' : 'col-sm-0 col-md-1'">
+    <div class="col-sm-4 col-md-3 col-lg-2">
       <ChannelNav />
     </div>
-    <div :class="showChannelSelector ? 'col-sm-8 col-md-9 col-lg-10' : 'col-sm-12 col-md-11'">
+    <div class="col-sm-8 col-md-9 col-lg-10">
       <div class="row">
         <div class="col-sm-9">
           <!-- Broadcast -->
@@ -58,7 +43,6 @@ export default {
     return {
       accountChannelId: BoxCastAPI.getAccountChannelId(),
       loading: false,
-      showChannelSelector: false,
       relatedBroadcasts: [],
       broadcast: {},
       channelName: ''
@@ -85,9 +69,6 @@ export default {
     }
   },
   methods: {
-    toggleChannelSelector () {
-      this.showChannelSelector = !this.showChannelSelector
-    },
     initChannelId () {
       if (this.$route && this.$route.query && this.$route.query.channel_id) {
         this.channelId = this.$route.query.channel_id

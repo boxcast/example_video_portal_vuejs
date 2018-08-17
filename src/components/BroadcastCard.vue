@@ -9,9 +9,9 @@
           <div class="timeframe badge badge-warning" v-if="timeframe == 'future'">
             Upcoming
           </div>
-          <div class="timeframe badge badge-secondary" v-if="timeframe == 'past' || timeframe == 'recently-ended'">
+          <!--div class="timeframe badge badge-secondary" v-if="timeframe == 'past' || timeframe == 'recently-ended'">
             Recorded
-          </div>
+          </div-->
           <span :class="'mascac-logo ' + icon" v-if="icon" style="zoom:0.5;position:absolute;right:10px;bottom:0;top:auto;left:auto;margin:0;"></span>
         </div>
         <div class="no-preview" v-if="!broadcast.preview">
@@ -21,9 +21,9 @@
           <div class="timeframe badge badge-warning" v-if="timeframe == 'future'">
             Upcoming
           </div>
-          <div class="timeframe badge badge-secondary" v-if="timeframe == 'past' || timeframe == 'recently-ended'">
+          <!--div class="timeframe badge badge-secondary" v-if="timeframe == 'past' || timeframe == 'recently-ended'">
             Recorded
-          </div>
+          </div-->
           <span :class="'mascac-logo ' + icon" v-if="icon" style="margin:0;"></span>
         </div>
       </div>
@@ -89,8 +89,10 @@ export default {
         case 'current':
           break
         case 'recently-ended':
-        case 'past':
           prefix = `Ended ${BoxCastAPI.utils.formatRelative(this.broadcast.stops_at, '', '')}`
+          break
+        case 'past':
+          prefix = `${BoxCastAPI.utils.formatRelative(this.broadcast.stops_at, '', '')}`
           break
       }
       if (prefix && this.broadcast.description) {
