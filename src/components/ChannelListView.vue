@@ -98,6 +98,7 @@ export default {
         return
       }
 
+      let doMulti = false
       let s = '-starts_at'
       let q = 'timeframe:relevant'
       let l = 20
@@ -109,30 +110,69 @@ export default {
           date.setDate(date.getDate() + 1)
           var end = date.toISOString().slice(0, 10)
           q = `timeframe:current timeframe:past starts_at:[${start} TO ${end}]`
+          // For multi-query, you get next/last 25 per school and no pagination :(
+          l = 25
+          doMulti = true
           break
         case 'UpcomingListView':
           q = 'timeframe:current timeframe:future'
           s = 'starts_at'
+          // For multi-query, you get next/last 25 per school and no pagination :(
+          l = 25
+          doMulti = true
           break
       }
       args = {s, q, l, ...args}
 
       if (reset) {
         this.broadcasts = []
+        this.pagination = {}
       }
-      this.loading = true
 
-      BoxCastAPI.getChannelBroadcasts(
-        this.channelId, args
-      ).then((response) => {
-        console.log(response)
-        this.broadcasts = this.broadcasts.concat(response.broadcasts)
-        this.pagination = response.pagination
-        this.loading = false
-      }).catch((e) => {
-        console.error(e)
-      })
+      if (doMulti) {
+        Promise.all(
+          Config.staticChannels.map((c) => {
+            return BoxCastAPI.getChannelBroadcasts(c.id, args)
+          })
+        ).then((responses) => {
+          let thisTripBroadcasts = []
+          responses.forEach((response) => {
+            thisTripBroadcasts = thisTripBroadcasts.concat(response.broadcasts)
+          })
+          if (s === 'starts_at') {
+            thisTripBroadcasts.sort(compare)
+          } else {
+            thisTripBroadcasts.sort((a, b) => compare(b, a))
+          }
+          this.broadcasts = this.broadcasts.concat(thisTripBroadcasts)
+          this.loading = false
+        }).catch((e) => {
+          console.error(e)
+        })
+      } else {
+        this.loading = true
+        BoxCastAPI.getChannelBroadcasts(
+          this.channelId, args
+        ).then((response) => {
+          console.log(response)
+          this.broadcasts = this.broadcasts.concat(response.broadcasts)
+          this.pagination = response.pagination
+          this.loading = false
+        }).catch((e) => {
+          console.error(e)
+        })
+      }
     }
+  }
+}
+
+function compare (a, b) {
+  if (a.starts_at < b.starts_at) {
+    return -1
+  } else if (a.starts_at > b.starts_at) {
+    return 1
+  } else {
+    return 0
   }
 }
 </script>
