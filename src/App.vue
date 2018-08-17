@@ -25,7 +25,7 @@
             Welcome to MASCAC.tv
           </div>
           <div class="col-6 text-right">
-            Return to MASCAC.com
+            <a href="https://www.mascac.com" style="color:#fff">Return to MASCAC.com</a>
           </div>
         </div>
       </div>

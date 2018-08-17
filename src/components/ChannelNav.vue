@@ -8,8 +8,8 @@
                           :active="$route.query.channel_id == 'upcoming' || $route.name == 'UpcomingListView'">Upcoming Broadcasts</b-list-group-item>
         <!--b-list-group-item href="#/highlights"
                           :active="$route.name == 'HighlightView' || $route.name == 'HighlightsListView'">Highlights</b-list-group-item-->
-        <b-list-group-item href="#/search"
-                          :active="$route.name == 'SearchView'">Search</b-list-group-item>
+        <!--b-list-group-item href="#/search"
+                          :active="$route.name == 'SearchView'">Search</b-list-group-item-->
       </b-list-group>
 
       <h4>Schools</h4>
@@ -25,7 +25,7 @@
     <div class="d-block d-sm-none mb-5">
       <div class="btn-group" style="width:100%">
         <button style="width:100%" id="dLabel" @click="toggleDropdown" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Navigation
+          Browse Channels
         </button>
         <div class="dropdown-menu" aria-labelledby="dLabel" style="width:100%" v-bind:style="{display:menuOpen?'block':'none'}">
           <a class="dropdown-item" href="#/" @click="toggleDropdown" v-bind:class="{active:$route.name == 'LiveAndRecentListView'}">Live and Recent Broadcasts</a>
@@ -33,8 +33,8 @@
                                    v-bind:class="{active:$route.name == 'UpcomingListView'}">Upcoming Broadcasts</a>
           <!--a class="dropdown-item" href="#/highlights" @click="toggleDropdown"
                                    v-bind:class="{active:$route.name == 'HighlightsListView'}">Highlights</a-->
-          <a class="dropdown-item" href="#/search" @click="toggleDropdown"
-                                   v-bind:class="{active:$route.name == 'SearchView'}">Search</a>
+          <!--a class="dropdown-item" href="#/search" @click="toggleDropdown"
+                                   v-bind:class="{active:$route.name == 'SearchView'}">Search</a-->
 
           <div class="dropdown-divider"></div>
 
