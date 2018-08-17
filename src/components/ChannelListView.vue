@@ -4,11 +4,24 @@
       <ChannelNav />
     </div>
     <div class="col-sm-8 col-md-9 col-lg-10">
-      <b-alert v-if="loading && broadcasts.length == 0" variant="info" show>Loading Broadcasts...</b-alert>
       <b-alert v-if="!loading && broadcasts.length == 0" variant="info" show>
         There are no broadcasts in the selected channel.
       </b-alert>
 
+      <div v-if="loading && broadcasts.length == 0" class="row">
+        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
+        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
+        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
+        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
+        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
+        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
+        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
+        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
+        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
+        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
+        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
+        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
+      </div>
       <div v-if="!listView">
         <transition-group name="list" tag="div" class="row">
           <div v-for="b in broadcasts" :key="b.id" class="col-sm-6 col-md-4 col-lg-3">
@@ -130,6 +143,7 @@ export default {
       }
 
       if (doMulti) {
+        this.loading = true
         Promise.all(
           Config.staticChannels.map((c) => {
             return BoxCastAPI.getChannelBroadcasts(c.id, args)

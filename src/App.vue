@@ -1,13 +1,9 @@
 <template>
   <div id="app">
-
-    <!--b-jumbotron header="MASCAC.tv"
-                 lead="">
-    </b-jumbotron-->
-
     <div class="eyebrow" style="margin-top:-15px">
       Massachusetts State Collegiate Athletic Conference
     </div>
+
     <div class="logobar">
       <div class="site-logo"></div>
       <div class="d-none d-md-block">
@@ -21,6 +17,7 @@
         <a href="#/channels/mshmvss7pspibfrs06vq" class="mascac-logo wor"></a>
       </div>
     </div>
+
     <div class="titlebar">
       <div class="container-fluid">
         <div class="row">
