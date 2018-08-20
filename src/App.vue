@@ -32,9 +32,27 @@
       <router-view/>
     </div>
 
-    <div style="background: #fff; opacity:0.8;margin:50px 0 0 0;padding:30px;text-align:center;font-size:14px;line-height:14px;">
-      Powered by &nbsp;
-      <a href="https://www.boxcast.com" target="_blank"><img alt="BoxCast" src="https://cdn2.hubspot.net/hub/484866/file-2483746126-png/Logos/NewBoxCastLogo.png?t=1473431021465" style="height:14px;margin-top:-4px;"></a>
+    <div style="background: #fff; opacity:0.8;margin:50px 0 0 0;padding:30px 30px 0 30px;text-align:center;font-size:14px;line-height:14px;">
+      <div class="row" style="align-items:center">
+        <div class="col-sm-4 text-center text-sm-left" style="margin-bottom:30px">
+          Massachusetts State Collegiate Athletic Conference<br>
+          577 Western Avenue, Westfield, MA 01085<br>
+          Office of the Commissioner: 413-572-8212<br>
+          Office of Media Relations: 413-572-8449
+        </div>
+        <div class="col-sm-4" style="margin-bottom:30px">
+          Powered by &nbsp;
+          <a href="https://www.boxcast.com" target="_blank">
+            <img alt="BoxCast" src="https://cdn2.hubspot.net/hub/484866/file-2483746126-png/Logos/NewBoxCastLogo.png?t=1473431021465" style="height:14px;margin-top:-4px;">
+          </a>
+        </div>
+        <div class="col-sm-4 text-center text-sm-right" style="margin-bottom:30px">
+          <a href="http://www.ncaa.org/d3" target="_blank">
+            <img
+            src="https://cdn.prestosports.com/action/cdn/lc9mnf3yffjf1a7l/images/setup/2015/footer_logo_1.png" style="height:44px">
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </template>

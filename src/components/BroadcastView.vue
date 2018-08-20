@@ -10,16 +10,16 @@
 
           <b-alert v-if="loading" variant="info" show>Loading Broadcast...</b-alert>
 
-          <div id="boxcast-container" ref="boxcastContainerEl">
+          <div id="boxcast-container" ref="boxcastContainerEl" style="margin-bottom:30px">
           </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-3 related-broadcasts">
           <!--
           <h3>Broadcast Information</h3>
           {{broadcast.starts_at}}
           -->
 
-          <p class="ellipse text-left">Related Broadcasts</p>
+          <h4 class="ellipse text-left">Related Broadcasts</h4>
           <div class="row">
             <div class="col-6 col-sm-12"
                   v-for="b in relatedBroadcasts"
@@ -111,5 +111,19 @@ export default {
 <style>
 .container[data-container] {
   max-width: 100%;
+}
+.related-broadcasts > h4 {
+  text-align: left;
+  font-size: 12pt;
+  color: #fff;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+.boxcast-boxoffice h1.boxcast-title {
+  font-size: 18pt;
+}
+.boxcast-boxoffice p.boxcast-description {
+  font-size: 14pt;
+  line-height: 1.2em;
 }
 </style>
