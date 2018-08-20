@@ -9,7 +9,8 @@
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
     "build:dist": "node build/build.js",
-    "build:docs": "rm -rf docs && npm run build:dist && mv dist docs"
+    "build:docs": "rm -rf docs && npm run build:dist && mv dist docs",
+    "deploy:mascac": "npm run build:dist && aws s3 sync dist/ s3://mascac.boxcast.com/v2/ --profile=prod"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-beta.2",
