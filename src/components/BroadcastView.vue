@@ -78,7 +78,22 @@ export default {
         window.__sharethis__.load('inline-share-buttons', {
           id: 'inline-share-buttons',
           enabled: true,
-          url: window.location.href
+          url: window.location.href,
+          alignment: 'center',
+          font_size: 12,
+          has_spacing: true,
+          labels: 'cta',
+          langauge: 'en',
+          min_count: 10,
+          networks: ['facebook', 'twitter', 'email', 'sms'],
+          num_networks: 4,
+          padding: 10,
+          radius: 4,
+          show_total: true,
+          size: 40,
+          size_label: 'medium',
+          spacing: 8,
+          use_native_counts: true
         })
       } catch (e) {
         console.error('unable to load share buttons', e)
