@@ -21,6 +21,21 @@
                           :active="$route.query.channel_id == c.id || $route.params.id == c.id"
                           :href="'#/channels/'+c.id">{{c.name}}</b-list-group-item>
       </b-list-group>
+
+      <h4>MASCAC.tv Apps</h4>
+      <em>Coming Soon!</em>
+      <div class="row">
+        <div class="col-7">
+          <a href="javascript://" target="_blank" title="Watch MASCAC.tv on Roku">
+            <img style="max-width:100%;width:140px" class="img" src="../assets/roku_logo.png">
+          </a>
+        </div>
+        <div class="col-5">
+          <a href="javascript://" target="_blank" title="Watch MASCAC.tv on AppleTV">
+            <img style="max-width:100%;width:90px;" class="img" src="../assets/appletv_logo.png">
+          </a>
+        </div>
+      </div>
     </div>
     <div class="d-block d-sm-none mb-5">
       <div class="btn-group" style="width:100%">
