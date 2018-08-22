@@ -12,6 +12,8 @@
 
           <div id="boxcast-container" ref="boxcastContainerEl" style="margin-bottom:30px">
           </div>
+
+          <div id="inline-share-buttons" class="sharethis-inline-share-buttons" style="margin-bottom:30px"></div>
         </div>
         <div class="col-sm-3 related-broadcasts">
           <!--
@@ -54,6 +56,7 @@ export default {
       this.context = boxcast(`#${this.$refs.boxcastContainerEl.id}`)
       this.initChannelId()
       this.getBroadcast()
+      this.initShare()
     } else {
       console.warn('Unable to find ref to boxcastContainerEl', this.$refs)
     }
@@ -65,10 +68,22 @@ export default {
     '$route' (to, from) {
       this.initChannelId()
       this.getBroadcast()
+      this.initShare()
       window.scrollTo(0, 0)
     }
   },
   methods: {
+    initShare () {
+      try {
+        window.__sharethis__.load('inline-share-buttons', {
+          id: 'inline-share-buttons',
+          enabled: true,
+          url: window.location.href
+        })
+      } catch (e) {
+        console.error('unable to load share buttons', e)
+      }
+    },
     initChannelId () {
       if (this.$route && this.$route.query && this.$route.query.channel_id) {
         this.channelId = this.$route.query.channel_id
