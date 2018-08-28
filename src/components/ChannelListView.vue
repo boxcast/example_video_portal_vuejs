@@ -123,15 +123,11 @@ export default {
           date.setDate(date.getDate() + 1)
           var end = date.toISOString().slice(0, 10)
           q = `timeframe:current timeframe:past starts_at:[${start} TO ${end}]`
-          // For multi-query, you get next/last 25 per school and no pagination :(
-          l = 25
           doMulti = true
           break
         case 'UpcomingListView':
           q = 'timeframe:current timeframe:future'
           s = 'starts_at'
-          // For multi-query, you get next/last 25 per school and no pagination :(
-          l = 25
           doMulti = true
           break
       }
@@ -144,28 +140,19 @@ export default {
 
       if (doMulti) {
         this.loading = true
-        Promise.all(
-          Config.staticChannels.map((c) => {
-            return BoxCastAPI.getChannelBroadcasts(c.id, args)
+        var commaDelimitedChannels = Config.staticChannels.map((c) => c.id).join(',')
+        var accountIdMap = {}
+        Config.staticChannels.forEach((c) => accountIdMap[c.accountId] = c.id)
+
+        BoxCastAPI.getChannelBroadcasts(commaDelimitedChannels, args)
+        .then((response) => {
+          response.broadcasts.forEach((b) => {
+            b.__viaRequestedChannelId = accountIdMap[b.account_id]
           })
-        ).then((responses) => {
-          responses.forEach((response, i) => {
-            response.broadcasts.forEach((b) => {
-              b.__viaRequestedChannelId = Config.staticChannels[i].id
-            })
-          })
-          return responses
-        }).then((responses) => {
-          let thisTripBroadcasts = []
-          responses.forEach((response) => {
-            thisTripBroadcasts = thisTripBroadcasts.concat(response.broadcasts)
-          })
-          if (s === 'starts_at') {
-            thisTripBroadcasts.sort(compare)
-          } else {
-            thisTripBroadcasts.sort((a, b) => compare(b, a))
-          }
-          this.broadcasts = this.broadcasts.concat(thisTripBroadcasts)
+          return response
+        }).then((response) => {
+          this.broadcasts = this.broadcasts.concat(response.broadcasts)
+          this.pagination = response.pagination
           this.loading = false
         }).catch((e) => {
           console.error(e)

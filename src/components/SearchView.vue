@@ -17,7 +17,7 @@
       </b-alert>
       <div class="row">
         <div v-for="b in broadcasts" :key="b.id" class="col-sm-6 col-md-4 col-lg-3">
-          <BroadcastCard :broadcast="b" :channelId="channelIdForBroadcastLink" />
+          <BroadcastCard :broadcast="b" :channelId="b.__viaRequestedChannelId" />
         </div>
       </div>
       <div class="row" v-if="pagination.next" style="margin-bottom:15px">
@@ -36,6 +36,7 @@
 
 <script>
 import BoxCastAPI from '@/services/BoxCastAPI'
+import Config from '@/config'
 export default {
   name: 'SearchView',
   data () {
@@ -60,13 +61,25 @@ export default {
         this.broadcasts = []
         this.pagination = {}
       }
+
       let s = '-starts_at'
       let l = 20
       let q = this.q
       args = {s, l, q, ...args}
+
+      var commaDelimitedChannels = Config.staticChannels.map((c) => c.id).join(',')
+      var accountIdMap = {}
+      Config.staticChannels.forEach((c) => accountIdMap[c.accountId] = c.id)
+
+
       BoxCastAPI.getChannelBroadcasts(
-        this.channelId, args
+        commaDelimitedChannels, args
       ).then((response) => {
+        response.broadcasts.forEach((b) => {
+          b.__viaRequestedChannelId = accountIdMap[b.account_id]
+        })
+        return response
+      }).then((response) => {
         this.broadcasts = this.broadcasts.concat(response.broadcasts)
         this.pagination = response.pagination
         this.loading = false

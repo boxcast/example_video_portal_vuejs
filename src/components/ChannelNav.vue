@@ -8,8 +8,8 @@
                           :active="$route.query.channel_id == 'upcoming' || $route.name == 'UpcomingListView'">Upcoming Broadcasts</b-list-group-item>
         <!--b-list-group-item href="#/highlights"
                           :active="$route.name == 'HighlightView' || $route.name == 'HighlightsListView'">Highlights</b-list-group-item-->
-        <!--b-list-group-item href="#/search"
-                          :active="$route.name == 'SearchView'">Search</b-list-group-item-->
+        <b-list-group-item href="#/search"
+                          :active="$route.name == 'SearchView'">Search</b-list-group-item>
       </b-list-group>
 
       <h4>Schools</h4>
@@ -48,8 +48,8 @@
                                    v-bind:class="{active:$route.name == 'UpcomingListView'}">Upcoming Broadcasts</a>
           <!--a class="dropdown-item" href="#/highlights" @click="toggleDropdown"
                                    v-bind:class="{active:$route.name == 'HighlightsListView'}">Highlights</a-->
-          <!--a class="dropdown-item" href="#/search" @click="toggleDropdown"
-                                   v-bind:class="{active:$route.name == 'SearchView'}">Search</a-->
+          <a class="dropdown-item" href="#/search" @click="toggleDropdown"
+                                   v-bind:class="{active:$route.name == 'SearchView'}">Search</a>
 
           <div class="dropdown-divider"></div>
 

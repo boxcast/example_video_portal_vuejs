@@ -106,9 +106,13 @@ export default {
     formatDuration: (broadcast) => boxcast.utils.broadcast.duration(broadcast),
     // Pretty string, e.g. 10 minutes ago
     formatRelative: (dateString, prefix = '', suffix = '') => {
-      let str = boxcast.utils.Clock.formatRelative(new Date(dateString))
+      let d = new Date(dateString)
+      let str = boxcast.utils.Clock.formatRelative(d)
       if (str.indexOf('/') > -1) {
         return str
+      } else if (str === 'today' || str === 'tomorrow') {
+        let time = boxcast.utils.Clock.formatTime(d)
+        return `${prefix} ${str} at ${time} ${suffix}`.trim()
       } else {
         return `${prefix} ${str} ${suffix}`.trim()
       }
