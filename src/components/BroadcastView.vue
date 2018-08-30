@@ -51,6 +51,7 @@ export default {
     }
   },
   mounted () {
+    window.scrollTo(0, 0)
     if (this.$refs.boxcastContainerEl) {
       // eslint-disable-next-line
       this.context = boxcast(`#${this.$refs.boxcastContainerEl.id}`)
@@ -145,7 +146,6 @@ export default {
 .related-broadcasts > h4 {
   text-align: left;
   font-size: 12pt;
-  color: #fff;
   text-transform: uppercase;
   opacity: 0.6;
 }

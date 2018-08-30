@@ -22,7 +22,7 @@
             Welcome to MASCAC.tv
           </div>
           <div class="col-6 text-right">
-            <a href="https://www.mascac.com" style="color:#fff">Return to MASCAC.com</a>
+            <a href="https://www.mascac.com" target="_top" style="color:#043562">Return to MASCAC.com</a>
           </div>
         </div>
       </div>
@@ -129,7 +129,10 @@ export default {
 /* navy: #043562*/
 
 body {
-  background-color: #000E1B;
+  /*background-color: #000E1B;*/
+  background-color:#aaa;
+  background: url(https://www.mascac.com/images/setup/2018_page_bg.jpg) no-repeat 50% 0,
+              url(https://www.mascac.com/images/setup/2018_bg_grey_pattern.png) repeat;
 }
 .card {
   background-color: #043562;
@@ -140,7 +143,7 @@ body {
   color: #ddd;
 }
 .channel-nav {
-  color: #ddd;
+  color: #043562;
 }
 .list-group-item {
   background-color: #E21F3C;
@@ -163,7 +166,7 @@ body {
 
 /* from sprite */
 .eyebrow {
-  background: #E21F3C;
+  background: #043562;
   color: #fff;
   padding: 10px;
   font-weight: bold;
@@ -173,17 +176,16 @@ body {
   text-overflow: ellipsis;
 }
 .logobar {
-  background: #0B59A3;
+  background: #FFF;
   padding-top: 5px;
   height: 120px;
 }
 .titlebar {
-  background: #043562;
-  border-bottom: 3px solid #E21F3C;
-  color: #fff;
-  margin-bottom: 30px;
+  background: transparent;
+  border-top: 1px solid #ccc;
+  color: #043562;
   font-weight: bold;
-  padding: 10px 0;
+  padding: 15px 0;
 }
 .site-logo {
   position:absolute;
