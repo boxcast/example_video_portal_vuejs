@@ -93,6 +93,9 @@ export default {
           break
         case 'past':
           prefix = `${BoxCastAPI.utils.formatRelative(this.broadcast.stops_at, '', '')}`
+          if (/^today/.test(prefix)) {
+            prefix = `Ended ${prefix.replace('today ', '')}`
+          }
           break
       }
       if (prefix && this.broadcast.description) {
