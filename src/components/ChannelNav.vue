@@ -24,18 +24,15 @@
 
       <h4>Watch Elsewhere</h4>
       <div class="card" style="background-color:#fff;border-color:rgba(0,0,0,.125);color:#333;">
-        <div class="card-header" style="background-color:rgba(0,0,0,.03)">
-          <em><small>TV Apps Coming Soon!</small></em>
-        </div>
         <div class="card-body" style="background-color:#fff">
           <div class="row" style="align-items:center">
             <div class="col-7">
-              <a href="javascript://" target="_blank" title="Watch MASCAC.tv on Roku">
+              <a href="https://channelstore.roku.com/browse" target="_blank" title="Watch MASCAC.tv on Roku">
                 <img style="max-width:100%;width:140px" class="img" src="../assets/roku_logo.png">
               </a>
             </div>
             <div class="col-5">
-              <a href="javascript://" target="_blank" title="Watch MASCAC.tv on AppleTV">
+              <a href="https://itunes.apple.com/us/app/mascac-tv/id1434585574?ls=1&mt=8" target="_blank" title="Watch MASCAC.tv on AppleTV">
                 <img style="max-width:100%;width:90px;" class="img" src="../assets/appletv_logo_dark.png">
               </a>
             </div>
