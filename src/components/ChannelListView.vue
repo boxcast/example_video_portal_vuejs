@@ -146,7 +146,11 @@ export default {
     },
     _shuffleLiveToTop () {
       this.broadcasts.sort(function (a, b) {
-        if (a.timeframe === b.timeframe && a.timeframe !== 'past') {
+        if (a.timeframe === 'current' && b.timeframe !== 'current') {
+          return -1
+        } else if (a.timeframe !== 'current' && b.timeframe === 'current') {
+          return 1
+        } else if (a.timeframe === b.timeframe && a.timeframe !== 'past') {
           // Reverse the "head of the list" that are either upcoming or live -- oldest to furthest in future
           if (a.starts_at < b.starts_at) {
             return -1
