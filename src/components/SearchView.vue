@@ -69,8 +69,7 @@ export default {
 
       var commaDelimitedChannels = Config.staticChannels.map((c) => c.id).join(',')
       var accountIdMap = {}
-      Config.staticChannels.forEach((c) => accountIdMap[c.accountId] = c.id)
-
+      Config.staticChannels.forEach((c) => { accountIdMap[c.accountId] = c.id })
 
       BoxCastAPI.getChannelBroadcasts(
         commaDelimitedChannels, args

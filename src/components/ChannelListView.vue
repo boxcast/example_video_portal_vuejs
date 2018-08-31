@@ -139,48 +139,76 @@ export default {
       }
 
       if (doMulti) {
-        this.loading = true
-        var commaDelimitedChannels = Config.staticChannels.map((c) => c.id).join(',')
-        var accountIdMap = {}
-        Config.staticChannels.forEach((c) => accountIdMap[c.accountId] = c.id)
-
-        BoxCastAPI.getChannelBroadcasts(commaDelimitedChannels, args)
-        .then((response) => {
-          response.broadcasts.forEach((b) => {
-            b.__viaRequestedChannelId = accountIdMap[b.account_id]
-          })
-          return response
-        }).then((response) => {
-          this.broadcasts = this.broadcasts.concat(response.broadcasts)
-          this.pagination = response.pagination
-          this.loading = false
-        }).catch((e) => {
-          console.error(e)
-        })
+        this._doLoadMulti(args)
       } else {
-        this.loading = true
-        BoxCastAPI.getChannelBroadcasts(
-          this.channelId, args
-        ).then((response) => {
-          console.log(response)
-          this.broadcasts = this.broadcasts.concat(response.broadcasts)
-          this.pagination = response.pagination
-          this.loading = false
-        }).catch((e) => {
-          console.error(e)
-        })
+        this._doLoadSingle(args)
       }
-    }
-  }
-}
+    },
+    _shuffleLiveToTop () {
+      this.broadcasts.sort(function (a, b) {
+        if (a.timeframe === b.timeframe && a.timeframe !== 'past') {
+          // Reverse the "head of the list" that are either upcoming or live -- oldest to furthest in future
+          if (a.starts_at < b.starts_at) {
+            return -1
+          } else if (a.starts_at > b.starts_at) {
+            return 1
+          } else {
+            return 0
+          }
+        } else {
+          // Default sort -- newest to oldest
+          if (a.starts_at < b.starts_at) {
+            return 1
+          } else if (a.starts_at > b.starts_at) {
+            return -1
+          } else {
+            return 0
+          }
+        }
+      })
+      console.log('shuffled live', this.broadcasts)
+    },
+    _doLoadSingle (args) {
+      this.loading = true
+      return BoxCastAPI.getChannelBroadcasts(
+        this.channelId, args
+      ).then((response) => {
+        console.log(response)
+        this.broadcasts = this.broadcasts.concat(response.broadcasts)
+        if (!args.p && args.s === '-starts_at') {
+          this._shuffleLiveToTop()
+        }
+        this.pagination = response.pagination
+        this.loading = false
+      }).catch((e) => {
+        console.error(e)
+        alert("I'm sorry but there was an error loading the channel. Please refresh and try again.")
+      })
+    },
+    _doLoadMulti (args) {
+      this.loading = true
+      var commaDelimitedChannels = Config.staticChannels.map((c) => c.id).join(',')
+      var accountIdMap = {}
+      Config.staticChannels.forEach((c) => { accountIdMap[c.accountId] = c.id })
 
-function compare (a, b) {
-  if (a.starts_at < b.starts_at) {
-    return -1
-  } else if (a.starts_at > b.starts_at) {
-    return 1
-  } else {
-    return 0
+      return BoxCastAPI.getChannelBroadcasts(commaDelimitedChannels, args)
+      .then((response) => {
+        response.broadcasts.forEach((b) => {
+          b.__viaRequestedChannelId = accountIdMap[b.account_id]
+        })
+        return response
+      }).then((response) => {
+        this.broadcasts = this.broadcasts.concat(response.broadcasts)
+        if (!args.p && args.s === '-starts_at') {
+          this._shuffleLiveToTop()
+        }
+        this.pagination = response.pagination
+        this.loading = false
+      }).catch((e) => {
+        console.error(e)
+        alert("I'm sorry but there was an error loading the channel. Please refresh and try again.")
+      })
+    }
   }
 }
 </script>
