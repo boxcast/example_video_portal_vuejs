@@ -5,11 +5,18 @@ import HighlightsListView from '@/components/HighlightsListView'
 import BroadcastView from '@/components/BroadcastView'
 import HighlightView from '@/components/HighlightView'
 import SearchView from '@/components/SearchView'
+import SelectChannelView from '@/components/SelectChannelView'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/',
+      name: 'SelectChannelView',
+      component: SelectChannelView
+    },
+    /*
     {
       path: '/',
       name: 'LiveAndRecentListView',
@@ -26,6 +33,12 @@ export default new Router({
       component: HighlightsListView
     },
     {
+      path: '/search',
+      name: 'SearchView',
+      component: SearchView
+    },
+    */
+    {
       path: '/channels/:id',
       name: 'ChannelListView',
       component: ChannelListView
@@ -39,11 +52,6 @@ export default new Router({
       path: '/highlights/:highlight_id',
       name: 'HighlightView',
       component: HighlightView
-    },
-    {
-      path: '/search',
-      name: 'SearchView',
-      component: SearchView
     }
   ]
 })

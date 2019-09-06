@@ -1,11 +1,18 @@
 <template>
   <div class="row">
-    <div class="col-sm-4 col-md-3 col-lg-2">
+    <!--div class="col-sm-4 col-md-3 col-lg-2">
       <ChannelNav />
-    </div>
-    <div class="col-sm-8 col-md-9 col-lg-10">
+    </div-->
+    <div class="col-12" XXclass="col-sm-8 col-md-9 col-lg-10">
       <div class="row">
         <div class="col-sm-9">
+          <p class="float-right" v-if="broadcast.id">
+            <a class="btn btn-primary" :href="'http://www.myspectrumsports.com/oh/midohio/player.html?broadcast=' + broadcast.id">
+              <strong>Spectrum Customers<br><small>Click Here to Watch For Free</small></strong>
+            </a>
+          </p>
+          <h2 class="text-left">{{broadcast.name}}</h2>
+          <div class="clearfix"></div>
           <!-- Broadcast -->
 
           <b-alert v-if="loading" variant="info" show>Loading Broadcast...</b-alert>
@@ -14,6 +21,12 @@
           </div>
 
           <div id="inline-share-buttons" class="sharethis-inline-share-buttons" style="margin-bottom:30px"></div>
+
+          <p v-if="broadcast.id">
+            <a :href="'http://www.myspectrumsports.com/oh/midohio/player.html?broadcast=' + broadcast.id">
+              <strong>Spectrum Customers Click Here to Watch For Free</strong>
+            </a>
+          </p>
         </div>
         <div class="col-sm-3 related-broadcasts">
           <!--

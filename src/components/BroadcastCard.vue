@@ -12,7 +12,7 @@
           <!--div class="timeframe badge badge-secondary" v-if="timeframe == 'past' || timeframe == 'recently-ended'">
             Recorded
           </div-->
-          <span :class="'mascac-logo ' + icon" v-if="icon" style="zoom:0.5;position:absolute;right:10px;bottom:0;top:auto;left:auto;margin:0;"></span>
+          <!--span :class="'mascac-logo ' + icon" v-if="icon" style="zoom:0.5;position:absolute;right:10px;bottom:0;top:auto;left:auto;margin:0;"></span-->
         </div>
         <div class="no-preview" v-if="!broadcast.preview">
           <div class="timeframe badge badge-danger" v-if="timeframe == 'current'">
@@ -24,12 +24,12 @@
           <!--div class="timeframe badge badge-secondary" v-if="timeframe == 'past' || timeframe == 'recently-ended'">
             Recorded
           </div-->
-          <span :class="'mascac-logo ' + icon" v-if="icon" style="margin:0;"></span>
+          <!--span :class="'mascac-logo ' + icon" v-if="icon" style="margin:0;"></span-->
         </div>
       </div>
     </div>
     <div class="card-body">
-      <p class="card-text ellipse"><small>{{accountName}}</small></p>
+      <!--p class="card-text ellipse"><small>{{accountName}}</small></p-->
       <h4 class="card-title">
         {{broadcast.name}}
       </h4>

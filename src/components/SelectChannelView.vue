@@ -1,52 +1,12 @@
 <template>
   <div class="row">
-    <div class="col-sm-4 col-md-3 col-lg-2">
-      <ChannelNav />
-    </div>
-    <div class="col-sm-8 col-md-9 col-lg-10">
-      <b-alert v-if="!loading && broadcasts.length == 0" variant="info" show>
-        There are no broadcasts in the selected channel.
-      </b-alert>
-
-      <div v-if="loading && broadcasts.length == 0" class="row">
-        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
-        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
-        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
-        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
-        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
-        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
-        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
-        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
-        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
-        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
-        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
-        <BroadcastSkeleton class="col-sm-6 col-md-4 col-lg-3" />
-      </div>
-      <div v-if="!listView">
-        <transition-group name="list" tag="div" class="row">
-          <div v-for="b in broadcasts" :key="b.id" class="col-sm-6 col-md-4 col-lg-3">
-            <BroadcastCard :broadcast="b" :channelId="b.__viaRequestedChannelId || channelIdForBroadcastLink" />
-          </div>
-        </transition-group>
-      </div>
-
-      <div v-if="listView">
-        <BroadcastRow v-for="b in broadcasts"
-                      :key="b.id"
-                      :broadcast="b"
-                      :channelId="b.__viaRequestedChannelId || channelIdForBroadcastLink"></BroadcastRow>
-      </div>
-
-      <div class="row" v-if="pagination.next" style="margin-bottom:15px">
-        <div class="col-sm-12">
-          <button class="btn btn-lg btn-secondary btn-block"
-                  @click="getBroadcasts(false, {p: pagination.next})"
-                  v-bind:disabled="loading">
-            <span v-if="loading">Loading...</span>
-            <span v-if="!loading">Load More</span>
-          </button>
+    <div class="col-12">
+      <h2>Select a Channel</h2>
+      <transition-group name="list" tag="div" class="row">
+        <div v-for="c in channels" :key="c.id" class="col-sm-6 col-md-4 col-lg-3">
+          <ChannelCard :channel="c" />
         </div>
-      </div>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -55,7 +15,7 @@
 import BoxCastAPI from '@/services/BoxCastAPI'
 import Config from '@/config'
 export default {
-  name: 'ChannelListView',
+  name: 'SelectChannelView',
   data () {
     return {
       accountChannelId: Config.channelId,
@@ -64,17 +24,18 @@ export default {
       broadcasts: [],
       pagination: {},
       channelId: null,
-      channelIdForBroadcastLink: null
+      channelIdForBroadcastLink: null,
+      channels: Config.staticChannels
     }
   },
   mounted () {
-    this.initChannelId()
-    this.getBroadcasts()
+    //this.initChannelId()
+    //this.getBroadcasts()
   },
   watch: {
     '$route' (to, from) {
-      this.initChannelId()
-      this.getBroadcasts()
+      //this.initChannelId()
+      //this.getBroadcasts()
       window.scrollTo(0, 0)
     }
   },
@@ -116,14 +77,6 @@ export default {
       let q = 'timeframe:relevant'
       let l = 20
       switch (this.$route.name) {
-        case 'ChannelListView':
-          // Include anything happening in next 24hr in the default view
-          var date = new Date()
-          var start = date.toISOString().slice(0, 10)
-          date.setDate(date.getDate() + 1)
-          var end = date.toISOString().slice(0, 10)
-          q = `timeframe:current timeframe:past starts_at:[${start} TO ${end}]`
-          break
         case 'LiveAndRecentListView':
           // Include anything happening in next 24hr in the default view
           var date = new Date()
@@ -131,7 +84,6 @@ export default {
           date.setDate(date.getDate() + 1)
           var end = date.toISOString().slice(0, 10)
           q = `timeframe:current timeframe:past starts_at:[${start} TO ${end}]`
-          // Trigger the "multi-view" channel logic
           doMulti = true
           break
         case 'UpcomingListView':

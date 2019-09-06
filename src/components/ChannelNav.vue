@@ -2,17 +2,17 @@
   <div class="channel-nav">
     <div class="d-none d-sm-block">
       <b-list-group>
-        <b-list-group-item href="#/"
+        <!--b-list-group-item href="#/"
                           :active="$route.query.channel_id == 'live_recent' || $route.name == 'LiveAndRecentListView'">Live and Recent Broadcasts</b-list-group-item>
         <b-list-group-item href="#/upcoming"
                           :active="$route.query.channel_id == 'upcoming' || $route.name == 'UpcomingListView'">Upcoming Broadcasts</b-list-group-item>
-        <!--b-list-group-item href="#/highlights"
-                          :active="$route.name == 'HighlightView' || $route.name == 'HighlightsListView'">Highlights</b-list-group-item-->
+        <b-list-group-item href="#/highlights"
+                          :active="$route.name == 'HighlightView' || $route.name == 'HighlightsListView'">Highlights</b-list-group-item>
         <b-list-group-item href="#/search"
-                          :active="$route.name == 'SearchView'">Search</b-list-group-item>
+                          :active="$route.name == 'SearchView'">Search</b-list-group-item-->
       </b-list-group>
 
-      <h4>Schools</h4>
+      <h4>Channels</h4>
       <b-list-group>
         <b-list-group-item disabled
                           v-if="loading">Loading Channels...</b-list-group-item>
@@ -22,6 +22,7 @@
                           :href="'#/channels/'+c.id">{{c.name}}</b-list-group-item>
       </b-list-group>
 
+      <!--
       <h4>Watch Elsewhere</h4>
       <div class="card" style="background-color:#fff;border-color:rgba(0,0,0,.125);color:#333;">
         <div class="card-body" style="background-color:#fff">
@@ -39,6 +40,7 @@
           </div>
         </div>
       </div>
+      -->
     </div>
     <div class="d-block d-sm-none mb-5">
       <div class="btn-group" style="width:100%">
@@ -46,17 +48,17 @@
           Browse Channels
         </button>
         <div class="dropdown-menu" aria-labelledby="dLabel" style="width:100%" v-bind:style="{display:menuOpen?'block':'none'}">
-          <a class="dropdown-item" href="#/" @click="toggleDropdown" v-bind:class="{active:$route.name == 'LiveAndRecentListView'}">Live and Recent Broadcasts</a>
+          <!--a class="dropdown-item" href="#/" @click="toggleDropdown" v-bind:class="{active:$route.name == 'LiveAndRecentListView'}">Live and Recent Broadcasts</a>
           <a class="dropdown-item" href="#/upcoming" @click="toggleDropdown"
                                    v-bind:class="{active:$route.name == 'UpcomingListView'}">Upcoming Broadcasts</a>
-          <!--a class="dropdown-item" href="#/highlights" @click="toggleDropdown"
-                                   v-bind:class="{active:$route.name == 'HighlightsListView'}">Highlights</a-->
+          <a class="dropdown-item" href="#/highlights" @click="toggleDropdown"
+                                   v-bind:class="{active:$route.name == 'HighlightsListView'}">Highlights</a>
           <a class="dropdown-item" href="#/search" @click="toggleDropdown"
-                                   v-bind:class="{active:$route.name == 'SearchView'}">Search</a>
+                                   v-bind:class="{active:$route.name == 'SearchView'}">Search</a-->
 
           <div class="dropdown-divider"></div>
 
-          <h6 class="dropdown-header">Schools</h6>
+          <h6 class="dropdown-header">Channels</h6>
           <a class="dropdown-item" disabled v-if="loading">Loading Channels...</a>
           <a class="dropdown-item" v-for="c in channels"
                   :key="c.id"
@@ -106,7 +108,7 @@ export default {
 <style>
 .channel-nav h4 {
   text-align: left;
-  margin-top: 30px;
+  /*margin-top: 30px;*/
   font-size: 12pt;
   text-transform: uppercase;
   opacity: 0.6;

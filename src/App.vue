@@ -1,32 +1,25 @@
 <template>
   <div id="app">
     <div class="eyebrow" style="margin-top:-15px">
-      Massachusetts State Collegiate Athletic Conference
+      Ohio High School Athletic Association
     </div>
 
     <div class="logobar">
-      <div class="site-logo"></div>
-      <div class="d-none d-md-block">
-        <a v-for="c in channels"
-            :key="c.id"
-            v-bind:class="'mascac-logo ' + c.abbrev"
-            :href="'#/channels/'+c.id"
-            :title="c.name">{{c.name}}</a>
-      </div>
-    </div>
-
-    <div class="titlebar">
-      <div class="container-fluid">
+      <div class="titlebar">
         <div class="row">
-          <div class="col-6 text-left">
-            Welcome to MASCAC.tv
+          <div class="col-12 col-sm-6 text-left">
+            <div style="padding-left: 120px">Welcome to The OHSAA Network</div>
           </div>
-          <div class="col-6 text-right">
-            <a href="https://www.mascac.com" target="_top" style="color:#043562">Return to MASCAC.com</a>
+          <div class="d-none d-sm-block col-6 text-right">
+            <div style="padding-right: 15px">
+              <a href="https://www.ohsaa.org" target="_top" style="color:#00853e">Return to OHSAA.org</a>
+            </div>
           </div>
         </div>
       </div>
+      <a href="#/" class="site-logo"></a>
     </div>
+
 
     <div class="container-fluid" style="min-height:calc(100vh - 365px)">
       <router-view/>
@@ -35,10 +28,7 @@
     <div style="background: #fff; opacity:0.8;margin:50px 0 0 0;padding:30px 30px 0 30px;text-align:center;font-size:14px;line-height:14px;">
       <div class="row" style="align-items:center">
         <div class="col-sm-4 text-center text-sm-left" style="margin-bottom:30px">
-          Massachusetts State Collegiate Athletic Conference<br>
-          577 Western Avenue, Westfield, MA 01085<br>
-          Office of the Commissioner: 413-572-8212<br>
-          Office of Media Relations: 413-572-8449
+          <!--OHSAA<br>-->
         </div>
         <div class="col-sm-4" style="margin-bottom:30px">
           Powered by &nbsp;
@@ -47,10 +37,6 @@
           </a>
         </div>
         <div class="col-sm-4 text-center text-sm-right" style="margin-bottom:30px">
-          <a href="http://www.ncaa.org/d3" target="_blank">
-            <img
-            src="https://cdn.prestosports.com/action/cdn/lc9mnf3yffjf1a7l/images/setup/2015/footer_logo_1.png" style="height:44px">
-          </a>
         </div>
       </div>
     </div>
@@ -126,7 +112,8 @@ export default {
 /* red: #E21F3C */
 /* dark: #000E1B */
 /* blue: #0B59A3 */
-/* navy: #043562*/
+/* navy: #00853e*/
+/* ohsaa green: #00853e*/
 
 body {
   /*background-color: #000E1B;*/
@@ -135,38 +122,49 @@ body {
               url(https://www.mascac.com/images/setup/2018_bg_grey_pattern.png) repeat;
 }
 .card {
-  background-color: #043562;
-  border-color: #043562;
+  background-color: #00853e;
+  border-color: #00853e;
 }
 .card-body {
-  background-color: #043562;
+  background-color: #00853e;
   color: #ddd;
 }
 .channel-nav {
-  color: #043562;
+  color: #00853e;
 }
 .list-group-item {
-  background-color: #E21F3C;
+  background-color: #0a6b37; /*dark green*/
   color: #ddd;
 }
 .list-group-item-action:focus, .list-group-item-action:hover {
-  background-color: #0B59A3;
+  background-color: #0a6b37; /*dark green*/
   color: #fff;
 }
 .list-group-item.active {
-  border-color: #043562;
-  background-color: #043562;
+  border-color: #00853e;
+  background-color: #00853e;
   color: #fff;
 }
 .boxcast-theme-light .boxcast-well {
-  background-color: #E21F3C;
-  color: #ddd;
+  /*background-color: #ff671b;
+  color: #ddd;*/
+}
+.boxcast-theme-light .boxcast-ticket-button {
+  background: #00853e;
+  border-color: #2ea063;
+  color: white;
+  font-size: 1.2em;
+  display: block;
+  width: 100%;
+  font-weight: bold;
+  border-width: 3px;
+  padding: 8px;
 }
 
 
 /* from sprite */
 .eyebrow {
-  background: #043562;
+  background: #00853e;
   color: #fff;
   padding: 10px;
   font-weight: bold;
@@ -178,24 +176,26 @@ body {
 .logobar {
   background: #FFF;
   padding-top: 5px;
-  height: 120px;
+  height: 75px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 15px;
 }
 .titlebar {
   background: transparent;
-  border-top: 1px solid #ccc;
-  color: #043562;
+  color: #00853e;
   font-weight: bold;
-  padding: 15px 0;
+  padding: 15px;
 }
 .site-logo {
-  position:absolute;
-  left:50%;
-  margin-left:-115px;
-  top:36px;
-  width:230px;
-  height:138px;
-  text-indent:-9999px;
-  background:url('./assets/mascac_sprite.png') no-repeat;
+  position: absolute;
+  left: 10px;
+  margin-left: 0;
+  top: 10px;
+  width: 127px;
+  height: 100px;
+  text-indent: -9999px;
+  background: url('http://ohsaa.org/Portals/_default/Skins/OHSAA/img/ohsaa-logo.svg') no-repeat;
+  background-size: contain;
 }
 .mascac-logo {
   display: inline-block;
@@ -246,6 +246,7 @@ body {
   background-position:-956px -150px;
 }
 @media (max-width: 1090px) {
+  /*
   .logobar {
     zoom: 0.70;
     height: 120px;
@@ -253,5 +254,6 @@ body {
   .site-logo {
     top: 55px;
   }
+  */
 }
 </style>
