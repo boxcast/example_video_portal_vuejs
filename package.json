@@ -1,6 +1,6 @@
 {
   "name": "example_video_portal_vuejs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Example video portal site for your BoxCast account written in vue.js",
   "author": "Mike Griffith <bikegriffith@gmail.com>",
   "private": true,
