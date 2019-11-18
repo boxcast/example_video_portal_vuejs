@@ -35,10 +35,7 @@
           -->
 
           <p class="ellipse text-left">Related Broadcasts</p>
-          <div class=""
-                v-for="b in relatedBroadcasts"
-                v-if="b.id != broadcast.id"
-                :key="b.id">
+          <div class="" v-for="b in relatedBroadcasts" :key="b.id">
             <BroadcastCard :broadcast="b" :channelId="channelId" />
           </div>
 
@@ -111,7 +108,7 @@ export default {
 
           // XXX:
           // eslint-disable-next-line
-          this.relatedBroadcasts = boxcast.model.PlaylistStore.broadcasts
+          this.relatedBroadcasts = boxcast.model.PlaylistStore.broadcasts.filter((b) => b.id !== this.broadcast.id)
           // eslint-disable-next-line
           this.channelName = boxcast.model.CurrentChannelStore.name
         },
