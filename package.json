@@ -4,9 +4,10 @@
   "description": "Example video portal site for your BoxCast account written in vue.js",
   "author": "Mike Griffith <bikegriffith@gmail.com>",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "start": "vue-cli-service serve",
+    "lint": "vue-cli-service lint",
+    "build:dist": "vue-cli-service build",
+    "build:docs": "rm -rf docs && npm run build:dist && mv dist docs"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
