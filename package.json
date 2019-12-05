@@ -7,7 +7,7 @@
     "start": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "build:dist": "vue-cli-service build",
-    "build:docs": "rm -rf docs && npm run build:dist && mv dist docs"
+    "build:docs": "VUE_PUBLIC_PATH=/example_video_portal_vuejs vue-cli-service build --dest=docs"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
