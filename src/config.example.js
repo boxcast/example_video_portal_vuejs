@@ -1,7 +1,7 @@
 export default {
-  accountId: '', // <-- find this from BoxCast Support
-  channelId: '', // <-- find this on your boxcast.tv global account page
+  accountId: '', //  vcovcmisu31gdqajitr8
+  channelId: '', // uvrsnnx3u1se7zsbsb8g
   channelFilter: (c) => {
-    return true  // <-- can use this to exclude certain channels from left nav
+    return true  // 
   }
 }
