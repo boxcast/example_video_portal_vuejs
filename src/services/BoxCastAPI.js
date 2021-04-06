@@ -9,7 +9,7 @@ if (!Config || !Config.accountId || !Config.channelId) {
   alert('BoxCast application portal not configured. Please ensure you have added your config.js')
 }
 
-const API_ROOT = 'https://api.boxcast.com'
+const API_ROOT = 'https://api.dev.boxcast.com'
 
 function parseJson (r) {
   return r.json()

@@ -4,6 +4,23 @@
       <ChannelNav />
     </div>
     <div class="col-sm-8 col-md-9 col-lg-10">
+
+      <ul class="list-inline">
+        <li class="list-inline-item">Filter Level:</li>
+        <li class="list-inline-item"><a href="javascript://" @click="tag('level', 'jv')">JV</a></li>
+        <li class="list-inline-item"><a href="javascript://" @click="tag('level', 'varsity')">Varsity</a></li>
+        <li class="list-inline-item"><a href="javascript://" v-if="tagged('level')" @click="tag('level')">x</a></li>
+        <li class="list-inline-item">•</li>
+        <li class="list-inline-item">Filter Location:</li>
+        <li class="list-inline-item"><a href="javascript://" @click="tag('location', 'home')">Home</a></li>
+        <li class="list-inline-item"><a href="javascript://" @click="tag('location', 'away')">Away</a></li>
+        <li class="list-inline-item"><a href="javascript://" v-if="tagged('location')" @click="tag('location')">x</a></li>
+        <li class="list-inline-item">•</li>
+        <li class="list-inline-item">Sort:</li>
+        <li class="list-inline-item"><a href="javascript://" @click="sort('-starts_at')">Date</a></li>
+        <li class="list-inline-item"><a href="javascript://" @click="sort('name')">Name</a></li>
+      </ul>
+
       <b-alert v-if="loading && broadcasts.length == 0" variant="info" show>Loading Broadcasts...</b-alert>
       <b-alert v-if="!loading && broadcasts.length == 0" variant="info" show>
         There are no broadcasts in the selected channel.
@@ -43,6 +60,7 @@ export default {
   name: 'ChannelListView',
   data () {
     return {
+      tags: ['location', 'level'],
       accountChannelId: Config.channelId,
       listView: !!Config.useListView,
       loading: false,
@@ -64,6 +82,26 @@ export default {
     }
   },
   methods: {
+    sort (field) {
+      let query = Object.assign({}, this.$route.query);
+      query.s = field;
+      this.$router.push({query});
+    },
+    tagged (dimension) {
+      return (this.$route.query || {})[dimension];
+    },
+    tag (dimension, value) {
+      let query = Object.assign({}, this.$route.query);
+      query[dimension] = value;
+
+      this.tags.forEach((t) => {
+        if (t !== dimension && this.tagged(t)) {
+          query[t] = this.tagged(t);
+        }
+      });
+
+      this.$router.push({query});
+    },
     bgStyle (b) {
       return {
         'background-image': `url("${b.preview}")`,
@@ -96,7 +134,7 @@ export default {
         return
       }
 
-      let s = '-starts_at'
+      let s = (this.$route.query || {}).s || '-starts_at'
       let q = 'timeframe:relevant'
       let l = 20
       switch (this.$route.name) {
@@ -108,6 +146,15 @@ export default {
           s = 'starts_at'
           break
       }
+
+      // TODO: parse tags
+      this.tags.forEach((t) => {
+        const value = this.tagged(t);
+        if (value) {
+          q = `${q} +tag:${value}`;
+        }
+      });
+
       args = {s, q, l, ...args}
 
       if (reset) {
